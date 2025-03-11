@@ -48,16 +48,7 @@ webhooks:
                   type: string
 
 components:
-  securitySchemes:
-    mTLS:
-      type: mutualTLS
-      description: "Mutual TLS authentication requiring client certificates"
-      x-validation-rules:
-        allowedCertificateAuthorities:
-          - "CN=TrustedCA, O=ExampleOrg, C=US"
-        requireClientCertificate: true
-
-  schemas:
+   schemas:
     ExampleSchema:
       type: object
       properties:
@@ -86,6 +77,3 @@ components:
             id: "789"
             name: "Sample Data"
             secret: "TopSecret"
-
-security:
-  - mTLS: []
