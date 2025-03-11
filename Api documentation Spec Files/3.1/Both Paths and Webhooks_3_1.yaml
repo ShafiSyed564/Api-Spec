@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: E-Commerce API
+  description: API for managing orders and receiving webhook notifications when order status changes.
+  version: 1.0.0
+
+servers:
+  - url: https://api.example.com
+    description: Production Server
+
+paths:
+  /orders:
+    get:
+      summary: Get a list of orders
+      operationId: getOrders
+      responses:
+        "200":
+          description: A list of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+
+    post:
+      summary: Create a new order
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewOrder"
+      responses:
+        "201":
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  /orders/{orderId}:
+    get:
+      summary: Get details of an order
+      operationId: getOrderById
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+    put:
+      summary: Update order status
+      operationId: updateOrderStatus
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [pending, completed, canceled]
+      responses:
+        "200":
+          description: Order updated successfully
+
+webhooks:
+  orderStatusUpdated:
+    post:
+      summary: Notify when an order status is updated
+      operationId: orderStatusWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderId:
+                  type: string
+                status:
+                  type: string
+                  enum: [pending, completed, canceled]
+      responses:
+        "200":
+          description: Webhook received successfully
+
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        status:
+          type: string
+          enum: [pending, completed, canceled]
+        totalAmount:
+          type: number
+          format: float
+
+    NewOrder:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: string
+        totalAmount:
+          type: number
+          format: float

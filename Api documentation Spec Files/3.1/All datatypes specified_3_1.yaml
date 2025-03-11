@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Data Type Example API
+  version: 1.0.0
+  description: API showcasing various data types and formats in OpenAPI 3.1
+
+paths:
+  /data:
+    post:
+      summary: Upload various data types
+      operationId: uploadData
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataTypeExamples"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Data received successfully"
+
+  /upload-file:
+    post:
+      summary: Upload a binary file
+      operationId: uploadFile
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: File uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "File uploaded successfully"
+
+components:
+  schemas:
+    DataTypeExamples:
+      type: object
+      properties:
+        integer32:
+          type: integer
+          format: int32
+          example: 123456
+        integer64:
+          type: integer
+          format: int64
+          example: 9223372036854775807
+        floatingPoint:
+          type: number
+          format: float
+          example: 3.14
+        doublePrecision:
+          type: number
+          format: double
+          example: 1.7976931348623157e+308
+        booleanValue:
+          type: boolean
+          example: true
+        stringValue:
+          type: string
+          example: "Hello, OpenAPI 3.1"
+        dateValue:
+          type: string
+          format: date
+          example: "2025-02-10"
+        dateTimeValue:
+          type: string
+          format: date-time
+          example: "2025-02-10T15:30:00Z"
+        durationValue:
+          type: string
+          format: duration
+          example: "P3Y6M4DT12H30M5S" # ISO 8601 duration format
+        uuidValue:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        jsonPointer:
+          type: string
+          format: json-pointer
+          example: "/components/schemas/DataTypeExamples"
+        byteValue:
+          type: string
+          format: byte
+          example: "U29tZUJhc2U2NEVuY29kZWRTdHJpbmc=" # Base64-encoded string
+        binaryValue:
+          type: string
+          format: binary
+          example: "Raw binary data is not JSON serializable"
+        bitFlag:
+          type: integer
+          description: "Simulating a bit using an integer (0 or 1)"
+          minimum: 0
+          maximum: 1
+          example: 1

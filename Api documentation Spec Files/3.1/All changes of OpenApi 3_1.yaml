@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: Example API
+  version: 1.0.0
+  description: API demonstrating OpenAPI 3.1 features
+
+paths:
+  /example:
+    get:
+      summary: Example endpoint
+      security:
+        - mTLS: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleSchema"
+              examples:
+                example1:
+                  value:
+                    id: "123"
+                    name: "Example"
+                    secret: "Hidden"
+                example2:
+                  value:
+                    id: "456"
+                    name: "Another Example"
+                    secret: "Confidential"
+                example3:
+                  value:
+                    id: "789"
+                    name: "Sample Data"
+                    secret: "TopSecret"
+
+webhooks:
+  newEvent:
+    post:
+      summary: Webhook for new events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event:
+                  type: string
+
+components:
+  securitySchemes:
+    mTLS:
+      type: mutualTLS
+      description: "Mutual TLS authentication requiring client certificates"
+      x-validation-rules:
+        allowedCertificateAuthorities:
+          - "CN=TrustedCA, O=ExampleOrg, C=US"
+        requireClientCertificate: true
+
+  schemas:
+    ExampleSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          deprecated: true
+        name:
+          type: string
+          readOnly: true
+        secret:
+          type: string
+          writeOnly: true
+        extra:
+          type: object
+          unevaluatedProperties: false
+      examples:
+        - value:
+            id: "123"
+            name: "Example"
+            secret: "Hidden"
+        - value:
+            id: "456"
+            name: "Another Example"
+            secret: "Confidential"
+        - value:
+            id: "789"
+            name: "Sample Data"
+            secret: "TopSecret"
+
+security:
+  - mTLS: []

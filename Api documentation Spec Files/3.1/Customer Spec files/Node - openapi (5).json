@@ -1,0 +1,4440 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Duality Platform API", "version": "4.2.0.0" },
+  "paths": {
+    "/AI/session/{session_id}": {
+      "get": {
+        "tags": ["AI", "Session"],
+        "summary": "Get Session",
+        "description": "Get an AI session.\nReturns:\n    AISession: The requested session.",
+        "operationId": "get_session_AI_session__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AISession" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AI/session/": {
+      "post": {
+        "tags": ["AI", "Session"],
+        "summary": "Start Session",
+        "description": "Start a session.\nReturns:\n    StartSessionAPIResponse: The session id of the created AI session.",
+        "operationId": "start_session_AI_session__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StartSessionPayload" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionIDAPIResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AI/session/{session_id}/terminate": {
+      "put": {
+        "tags": ["AI", "Session"],
+        "summary": "Terminate Session",
+        "description": "Terminate an AI session.\nReturns:\n    AISession: The requested session.",
+        "operationId": "terminate_session_AI_session__session_id__terminate_put",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Session Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionIDAPIResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AI/project/{project_id}/config": {
+      "get": {
+        "tags": ["AI", "Project"],
+        "summary": "Get Ai Participant Project Config",
+        "description": "Get the participant project configuration for an ai project.\nReturns:\n    ParticipantProjectConfig: The complete participant configuration.",
+        "operationId": "get_ai_participant_project_config_AI_project__project_id__config_get",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParticipantProjectConfig"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AI/project/{project_id}/roles_readiness": {
+      "get": {
+        "tags": ["AI", "Project"],
+        "summary": "Get Ai Project Roles Readiness",
+        "description": "Get the roles readinsess for an ai project.\nReturns:\n    ProjectRolesReadiness: The complete participant configuration.",
+        "operationId": "get_ai_project_roles_readiness_AI_project__project_id__roles_readiness_get",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectRolesReadiness"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AI/project/{project_id}/config/encryption": {
+      "post": {
+        "tags": ["AI", "Project"],
+        "summary": "Configure Ai Project Participant Use Encryption",
+        "description": "Configure the AI project participant to use encryption.\nReturns:\n    ParticipantProjectConfig: The updated participant AI project configuration.",
+        "operationId": "configure_ai_project_participant_use_encryption_AI_project__project_id__config_encryption_post",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureEncryptionPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParticipantProjectConfig"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AI/project/{project_id}/config/output": {
+      "post": {
+        "tags": ["AI", "Project"],
+        "summary": "Configure Ai Project Participant Output Location",
+        "description": "Configure the AI project participant output location.\nReturns:\n    ParticipantProjectConfig: The updated participant AI project configuration.",
+        "operationId": "configure_ai_project_participant_output_location_AI_project__project_id__config_output_post",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureOutputLocationPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParticipantProjectConfig"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/{asset_id}": {
+      "get": {
+        "tags": ["Asset"],
+        "summary": "Get Asset By Id",
+        "description": "Get an asset's details\nArgs:\n    asset_id (str): ID of the asset to get the details for\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    Asset: Asset that the details are requested for",
+        "operationId": "get_asset_by_id_asset__asset_id__get",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Asset" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Asset"],
+        "summary": "Update Asset",
+        "description": "Update an existing asset with the provided values\nArgs:\n    payload (AssetUpdatePayload): Details of the asset to update\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    Asset: Updated asset values",
+        "operationId": "update_asset_asset__asset_id__put",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AssetUpdatePayload" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Asset" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Asset"],
+        "summary": "Delete Asset",
+        "description": "Delete an asset from the system\nArgs:\n    asset_id (str): ID of the asset to delete\nRaises:\n    HTTPException: Exception in case of an error in the http request",
+        "operationId": "delete_asset_asset__asset_id__delete",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/": {
+      "get": {
+        "tags": ["Asset"],
+        "summary": "List Assets",
+        "description": "List all existing assets\nReturns:\n    list[Asset]: List of assets",
+        "operationId": "list_assets_asset__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Asset" },
+                  "type": "array",
+                  "title": "Response List Assets Asset  Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Asset"],
+        "summary": "Create Asset",
+        "description": "Create a new asset\nArgs:\n    payload (AssetCreationPayload): Details of the new asset to create\n    user (Annotated[User, Depends): User creating the asset\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    AssetCreationResponse: Response of the newly created asset",
+        "operationId": "create_asset_asset__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AssetCreationPayload" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetCreationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/associate": {
+      "post": {
+        "tags": ["Asset"],
+        "summary": "Associate To Project",
+        "description": "Associate the provided projects to the asset\nArgs:\n    payload (list[AssetAssociationPayload]): Payload of the request\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    list[Asset]: Updated assets",
+        "operationId": "associate_to_project_asset_associate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/AssetAssociationPayload"
+                },
+                "type": "array",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Asset" },
+                  "type": "array",
+                  "title": "Response Associate To Project Asset Associate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/dissociate": {
+      "post": {
+        "tags": ["Asset"],
+        "summary": "Dissociate To Project",
+        "description": "Dissociate the provided projects to the asset\nArgs:\n    payload (DissociateAssetToProjectPayload): Payload of the request\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    list[Asset]: Updated assets",
+        "operationId": "dissociate_to_project_asset_dissociate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/AssetAssociationPayload"
+                },
+                "type": "array",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Asset" },
+                  "type": "array",
+                  "title": "Response Dissociate To Project Asset Dissociate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/test": {
+      "post": {
+        "tags": ["Asset"],
+        "summary": "Test Asset Connection",
+        "description": "Test the connection to the provided asset values\nArgs:\n    payload (ConnectionTestPayload): info on where to find the assets\nRaises:\n    HTTPException: Exception in case of an error in the http request",
+        "operationId": "test_asset_connection_asset_test_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ConnectionTestPayload" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/asset/columns": {
+      "post": {
+        "tags": ["Asset"],
+        "summary": "Get Asset Columns",
+        "description": "Get the columns of the provided asset values (No asset creation required)\nArgs:\n    payload (AssetConnectionDetails): Details of where to scan for columns\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    dict[str, str]: Column named mapped to the column type",
+        "operationId": "get_asset_columns_asset_columns_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GetColumnsPayload" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": { "type": "string" },
+                  "type": "object",
+                  "title": "Response Get Asset Columns Asset Columns Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schema/{asset_schema_id}": {
+      "get": {
+        "tags": ["Schema"],
+        "summary": "Get Asset Schema",
+        "description": "Get the asset schema by the provided ID.\nArgs:\n    asset_schema_id (str): The id of the schema to retrieve.\n\nReturns:\n    AssetSchema: The requested asset schema.",
+        "operationId": "get_asset_schema_schema__asset_schema_id__get",
+        "parameters": [
+          {
+            "name": "asset_schema_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Schema Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AssetSchema" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Schema"],
+        "summary": "Update Asset Schema",
+        "description": "Update a given asset schema with new values.\nArgs:\n    asset_schema_id (str): Id of the asset schema to update.\n    payload (UpdateAssetSchemaPayload): Payload to update the asset schema.\n\nReturns:\n    AssetSchema: The values of the updated asset schema.",
+        "operationId": "update_asset_schema_schema__asset_schema_id__put",
+        "parameters": [
+          {
+            "name": "asset_schema_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Schema Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssetSchemaPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AssetSchema" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Schema"],
+        "summary": "Delete Asset Schema",
+        "description": "Delete an asset schema.\nArgs:\n    asset_schema_id (str): ID of the asset schema to delete.",
+        "operationId": "delete_asset_schema_schema__asset_schema_id__delete",
+        "parameters": [
+          {
+            "name": "asset_schema_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Schema Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schema/": {
+      "post": {
+        "tags": ["Schema"],
+        "summary": "Create Asset Schema",
+        "description": "Create a new asset schema.\nArgs:\n    payload (NewAssetSchemaPayload): The new asset schema to be created.\n\nReturns:\n    NewSchemaResponse: The response of the new asset schema.",
+        "operationId": "create_asset_schema_schema__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NewAssetSchemaPayload" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NewSchemaResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Schema"],
+        "summary": "Get Asset Schema List",
+        "description": "Get a list of all asset schemas\nNote: The actual schema is only provided by the direct GET via ID request to save memory\nReturns:\n    list[AssetSchema]: List of the found asset schemas",
+        "operationId": "get_asset_schema_list_schema__get",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Project Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AssetSchema" },
+                  "title": "Response Get Asset Schema List Schema  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schema/{asset_schema_id}/discovery": {
+      "post": {
+        "tags": ["Schema"],
+        "summary": "Run Schema Discovery",
+        "description": "Start schema discovery on a given schema\nArgs:\n    asset_schema_id (str): ID of the asset schema to run discovery for",
+        "operationId": "run_schema_discovery_schema__asset_schema_id__discovery_post",
+        "parameters": [
+          {
+            "name": "asset_schema_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Schema Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RunDiscoveryPayload" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schema/{asset_schema_id}/discovery/terminate": {
+      "post": {
+        "tags": ["Schema"],
+        "summary": "Terminate Schema Discovery",
+        "description": "Terminator schema discovery on a given schema\nArgs:\n    asset_schema_id (str): ID of the asset schema to terminate discovery for",
+        "operationId": "terminate_schema_discovery_schema__asset_schema_id__discovery_terminate_post",
+        "parameters": [
+          {
+            "name": "asset_schema_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Asset Schema Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/{resource_id}": {
+      "get": {
+        "tags": ["Resource"],
+        "summary": "Get Resource",
+        "description": "Get a resource",
+        "operationId": "get_resource_resource__resource_id__get",
+        "parameters": [
+          {
+            "name": "resource_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Resource Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Resource" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Resource"],
+        "summary": "Update Resource",
+        "description": "Update an existing resource fields with the provided values",
+        "operationId": "update_resource_resource__resource_id__put",
+        "parameters": [
+          {
+            "name": "resource_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Resource Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResourceApiPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Resource" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Resource"],
+        "summary": "Delete Resource",
+        "description": "Delete an resource",
+        "operationId": "delete_resource_resource__resource_id__delete",
+        "parameters": [
+          {
+            "name": "resource_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Resource Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/": {
+      "post": {
+        "tags": ["Resource"],
+        "summary": "Create Resource",
+        "description": "Create a new resource",
+        "operationId": "create_resource_resource__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResourceApiPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ResourceIdResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Resource"],
+        "summary": "List Resources",
+        "description": "List existing resources",
+        "operationId": "list_resources_resource__get",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "$ref": "#/components/schemas/ResourceType" },
+                { "type": "null" }
+              ],
+              "title": "Type"
+            }
+          },
+          {
+            "name": "project_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Project Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Resource" },
+                  "title": "Response List Resources Resource  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/associate": {
+      "post": {
+        "tags": ["Resource"],
+        "summary": "Associate To Project",
+        "description": "Assoicate projects to resources",
+        "operationId": "associate_to_project_resource_associate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/ResourceAssociationPayload"
+                },
+                "type": "array",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Resource" },
+                  "type": "array",
+                  "title": "Response Associate To Project Resource Associate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/dissociate": {
+      "post": {
+        "tags": ["Resource"],
+        "summary": "Dissociate From Project",
+        "description": "Dissoicate projects from resources",
+        "operationId": "dissociate_from_project_resource_dissociate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/ResourceAssociationPayload"
+                },
+                "type": "array",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Resource" },
+                  "type": "array",
+                  "title": "Response Dissociate From Project Resource Dissociate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/details": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get User Details",
+        "description": "Get user public details\nArgs:\n    asset_owners (bool): Should only return users that own an asset\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    dict[str, UserDetailsResponse]: User ID mapped to it's public details",
+        "operationId": "get_user_details_user_details_get",
+        "parameters": [
+          {
+            "name": "asset_owners",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Asset Owners"
+            }
+          },
+          {
+            "name": "resource_owners",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Resource Owners"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/UserDetailsResponse"
+                  },
+                  "title": "Response Get User Details User Details Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ZFI/project/{project_id}/config/cross-domain/": {
+      "get": {
+        "tags": ["Query", "Project", "Cross Domain Settings"],
+        "summary": "Get Cross Domain Settings By Project Id",
+        "description": "Get cross domain settings for a project\nArgs:\n    project_id (str): ID of the project to get the cross domain settings for\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    CrossDomainSettings: Cross domain settings of the requested project",
+        "operationId": "get_cross_domain_settings_by_project_id_ZFI_project__project_id__config_cross_domain__get",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CrossDomainSettings" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Query", "Project", "Cross Domain Settings"],
+        "summary": "Create Cross Domain Settings By Project Id",
+        "description": "Create a new cross domain settings for a project\nArgs:\n    project_id (str): ID of the project to create the cross domain settings for\n    payload (CrossDomainSettingsCreatePayload): Details of the new cross domain settings to create\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    CrossDomainSettings: Response of the newly created cross domain settings",
+        "operationId": "create_cross_domain_settings_by_project_id_ZFI_project__project_id__config_cross_domain__post",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossDomainSettingsCreatePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CrossDomainSettings" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Query", "Project", "Cross Domain Settings"],
+        "summary": "Update Cross Domain Settings By Project Id",
+        "description": "Update an existing cross domain settings with the provided values\nArgs:\n    project_id (str): ID of the project to update the cross domain settings for\n    payload (CrossDomainSettingsUpdatePayload): Details of the cross domain settings to update\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    CrossDomainSettings: Updated cross domain settings values",
+        "operationId": "update_cross_domain_settings_by_project_id_ZFI_project__project_id__config_cross_domain__put",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossDomainSettingsUpdatePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CrossDomainSettings" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Query", "Project", "Cross Domain Settings"],
+        "summary": "Delete Cross Domain Settings By Project Id",
+        "description": "Delete an existing cross domain settings\nArgs:\n    project_id (str): ID of the project to delete the cross domain settings for\nRaises:\n    HTTPException: Exception in case of an error in the http request\nReturns:\n    CrossDomainSettings: Updated cross domain settings values",
+        "operationId": "delete_cross_domain_settings_by_project_id_ZFI_project__project_id__config_cross_domain__delete",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Project Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrossDomainSettingsDeletionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AIProjectConfig": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The unique identifier of the AI project config is the project id"
+          },
+          "debug_mode": {
+            "type": "boolean",
+            "title": "Debug Mode",
+            "description": "Whether the AI project is in debug mode",
+            "default": false
+          },
+          "privacy_settings": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/PrivacySettingsSection" },
+              { "type": "null" }
+            ],
+            "description": "Configuration section that contains all privacy settings"
+          },
+          "default_session_type": {
+            "$ref": "#/components/schemas/WorkloadType",
+            "description": "Default session type",
+            "default": "Centralized"
+          },
+          "datasets": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "$ref": "#/components/schemas/DatasetAssetShare"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Datasets",
+            "description": "Datasets associated with the AI project"
+          },
+          "models": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "$ref": "#/components/schemas/ModelAssetShare"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Models",
+            "description": "Models associated with the AI project"
+          },
+          "workloads": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "$ref": "#/components/schemas/WorkloadAssetShare"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Workloads",
+            "description": "Workloads associated with the AI project"
+          },
+          "enclave": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/EnclaveShare" },
+              { "type": "null" }
+            ],
+            "description": "Encalve associated with the AI project"
+          },
+          "ready_for_session": {
+            "$ref": "#/components/schemas/ReadyForSession",
+            "description": "Whether the AI project is ready for a session"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At",
+            "description": "The time the AI project config was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "title": "Updated At",
+            "description": "The time the AI project config config was last updated"
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "AIProjectConfig"
+      },
+      "AISession": {
+        "properties": {
+          "id": { "type": "string", "title": "Session id" },
+          "project_type": {
+            "type": "string",
+            "title": "Project type",
+            "description": "Type of project, e.g. AI, ZFI"
+          },
+          "display_name": { "type": "string", "title": "Session display name" },
+          "project_id": {
+            "type": "string",
+            "title": "Project id",
+            "description": "The session project id"
+          },
+          "initiator": {
+            "$ref": "#/components/schemas/SessionInitiator",
+            "title": "Session initiator",
+            "description": "The participant and user that initiated the session"
+          },
+          "supervisor_name": {
+            "$ref": "#/components/schemas/Supervisor",
+            "title": "Supervisor type",
+            "description": "The supervisor type"
+          },
+          "participants": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SessionParticipant"
+            },
+            "type": "object",
+            "title": "Session participants",
+            "description": "The participants in the session"
+          },
+          "session_params": {
+            "$ref": "#/components/schemas/AISessionParams",
+            "title": "Session parameters",
+            "description": "The session parameters"
+          },
+          "group_id": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "The session group id",
+            "description": "ID that groups multiple sessions"
+          },
+          "create_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Session creation time",
+            "description": "The session creation time"
+          },
+          "change_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Session change time",
+            "description": "The session change time"
+          },
+          "status_timestamps": {
+            "additionalProperties": { "type": "string", "format": "date-time" },
+            "propertyNames": { "$ref": "#/components/schemas/SessionStatus" },
+            "type": "object",
+            "title": "Session status timestamps",
+            "description": "The session status changes timestamps"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SessionStatus",
+            "title": "Session status",
+            "description": "The session status",
+            "default": "CREATED"
+          },
+          "failure_metadata": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/SessionFailureMetadata" },
+              { "type": "null" }
+            ],
+            "title": "Session failure metadata",
+            "description": "The session failure metadata"
+          },
+          "percentage": {
+            "type": "integer",
+            "title": "Session progress percentage",
+            "description": "The session progress percentage",
+            "default": 0
+          },
+          "note": {
+            "anyOf": [
+              { "type": "object" },
+              { "$ref": "#/components/schemas/StringLocalParameter" }
+            ],
+            "title": "Session note",
+            "description": "The session note"
+          },
+          "session_send_results_notification": {
+            "type": "boolean",
+            "title": "Session send results notification",
+            "description": "Wether the session should send results notification (Email)",
+            "default": false
+          },
+          "session_timeout_sec": {
+            "type": "integer",
+            "title": "session timeout",
+            "description": "The session timeout in seconds",
+            "default": 18000
+          },
+          "seen": {
+            "type": "boolean",
+            "title": "Session seen",
+            "description": "Wether the session was seen",
+            "default": false
+          },
+          "notified": {
+            "additionalProperties": {
+              "anyOf": [{ "type": "integer" }, { "type": "boolean" }]
+            },
+            "type": "object",
+            "title": "Session tasks and percentages notified",
+            "description": "Mapping of wether the tasks and session percentage were notified"
+          },
+          "phase_name": {
+            "type": "string",
+            "title": "Phase in session",
+            "description": "Phase name in the running session",
+            "default": ""
+          },
+          "deleted": {
+            "type": "boolean",
+            "title": "Session deleted",
+            "description": "Wether the session was soft deleted",
+            "default": false
+          },
+          "result": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/AISessionResult" },
+              { "type": "null" }
+            ],
+            "title": "The session result",
+            "description": "The session result"
+          },
+          "error": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "The session error",
+            "description": "The session error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "project_type",
+          "display_name",
+          "project_id",
+          "initiator",
+          "supervisor_name",
+          "session_params"
+        ],
+        "title": "AISession"
+      },
+      "AISessionParamAssetDetails": {
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "title": "Asset id",
+            "description": "The asset id"
+          },
+          "participant_id": {
+            "type": "string",
+            "title": "Participant id",
+            "description": "The participant id of the asset"
+          },
+          "name": {
+            "type": "string",
+            "title": "Dataset name",
+            "description": "The asset name"
+          },
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType",
+            "title": "Asset type",
+            "description": "The asset type"
+          }
+        },
+        "type": "object",
+        "required": ["asset_id", "participant_id", "name", "asset_type"],
+        "title": "AISessionParamAssetDetails"
+      },
+      "AISessionParamWorkloadParameterDetails": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/WorkloadParameterType" },
+              { "type": "null" }
+            ],
+            "description": "The type of the workload parameter"
+          },
+          "default_value": {
+            "anyOf": [
+              { "type": "number" },
+              { "type": "string" },
+              { "$ref": "#/components/schemas/AssetID" },
+              { "type": "null" }
+            ],
+            "title": "Default Value",
+            "description": "Default value of the parameter"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the workload parameter",
+            "default": ""
+          },
+          "optional": {
+            "type": "boolean",
+            "title": "Optional",
+            "description": "Whether the parameter is optional",
+            "default": false
+          },
+          "value": {
+            "anyOf": [
+              { "type": "number" },
+              { "type": "string" },
+              { "$ref": "#/components/schemas/AssetID" },
+              { "type": "null" }
+            ],
+            "title": "Workload parameter value",
+            "description": "The workload parameter value"
+          }
+        },
+        "type": "object",
+        "required": ["value"],
+        "title": "AISessionParamWorkloadParameterDetails"
+      },
+      "AISessionParams": {
+        "properties": {
+          "workload": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/TEESessionParamWorkloadDetails" },
+              { "$ref": "#/components/schemas/FLSessionParamWorkloadDetails" }
+            ],
+            "title": "Workload",
+            "description": "Workload associated with the AI Session",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "Centralized": "#/components/schemas/TEESessionParamWorkloadDetails",
+                "Federated": "#/components/schemas/FLSessionParamWorkloadDetails"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["workload"],
+        "title": "AISessionParams"
+      },
+      "AISessionResult": {
+        "properties": {
+          "output_location": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/GCPObjectStoreLocation" },
+              { "$ref": "#/components/schemas/AWSS3Location" },
+              { "$ref": "#/components/schemas/AzureBlobStorageLocation" },
+              { "$ref": "#/components/schemas/LocalStorageLocation" }
+            ],
+            "title": "The result location",
+            "description": "The location of the session result",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "AWSObjectStore": "#/components/schemas/AWSS3Location",
+                "AzureObjectStore": "#/components/schemas/AzureBlobStorageLocation",
+                "GCPObjectStore": "#/components/schemas/GCPObjectStoreLocation",
+                "LocalStorage": "#/components/schemas/LocalStorageLocation"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["output_location"],
+        "title": "AISessionResult"
+      },
+      "AWSObjectStoreAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AWSObjectStore",
+            "title": "Type",
+            "description": "Connection type of the AWS object store"
+          },
+          "bucket": {
+            "type": "string",
+            "title": "Bucket",
+            "description": "Bucket name of the object store"
+          },
+          "access_key_id": {
+            "type": "string",
+            "title": "Access Key Id",
+            "description": "Access Key ID (Provided by AWS)"
+          },
+          "secret_access_key": {
+            "type": "string",
+            "title": "Secret Access Key",
+            "description": "Secret Access Key (Provided by AWS)"
+          },
+          "is_folder": {
+            "type": "boolean",
+            "title": "Is Folder",
+            "description": "If the store is a folder or a file"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "Sub path of the object in the bucket"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "bucket",
+          "access_key_id",
+          "secret_access_key",
+          "is_folder",
+          "path"
+        ],
+        "title": "AWSObjectStoreAssetSource"
+      },
+      "AWSS3": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AWSObjectStore",
+            "title": "Type"
+          },
+          "bucket": { "type": "string", "title": "Bucket" },
+          "path": { "type": "string", "title": "Path" },
+          "access_key_id": { "type": "string", "title": "Access Key Id" },
+          "secret_access_key": {
+            "type": "string",
+            "title": "Secret Access Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "bucket",
+          "path",
+          "access_key_id",
+          "secret_access_key"
+        ],
+        "title": "AWSS3"
+      },
+      "AWSS3Location": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AWSObjectStore",
+            "title": "Type"
+          },
+          "bucket": { "type": "string", "title": "Bucket" },
+          "path": { "type": "string", "title": "Path" }
+        },
+        "type": "object",
+        "required": ["type", "bucket", "path"],
+        "title": "AWSS3Location"
+      },
+      "AnalyzingPartyConfig": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "output_location": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/GCPObjectStore" },
+                  { "$ref": "#/components/schemas/AWSS3" },
+                  { "$ref": "#/components/schemas/AzureBlobStorage-Output" },
+                  { "$ref": "#/components/schemas/LocalStorage" }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "AWSObjectStore": "#/components/schemas/AWSS3",
+                    "AzureObjectStore": "#/components/schemas/AzureBlobStorage-Output",
+                    "GCPObjectStore": "#/components/schemas/GCPObjectStore",
+                    "LocalStorage": "#/components/schemas/LocalStorage"
+                  }
+                }
+              },
+              { "type": "null" }
+            ],
+            "title": "Output Location",
+            "description": "The location where the analyzing party will store the output"
+          },
+          "use_encryption": {
+            "type": "boolean",
+            "title": "Use Encryption",
+            "description": "Whether to use encryption",
+            "default": true
+          },
+          "project_id": {
+            "type": "string",
+            "title": "Project Id",
+            "description": "The ID of the project the analyzing party is associated with"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The time the analyzing party config was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The time the analyzing party config was last updated"
+          }
+        },
+        "type": "object",
+        "required": ["project_id"],
+        "title": "AnalyzingPartyConfig"
+      },
+      "Asset": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "ID of the asset"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name",
+            "description": "Asset display name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the asset"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id",
+            "description": "ID of the user who created the asset"
+          },
+          "source": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/MySQLAssetSource" },
+              { "$ref": "#/components/schemas/PostgresAssetSource" },
+              { "$ref": "#/components/schemas/MsSQLAssetSource" },
+              { "$ref": "#/components/schemas/OracleAssetSource" },
+              { "$ref": "#/components/schemas/SnowflakeAssetSource" },
+              { "$ref": "#/components/schemas/GCPObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AWSObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AzureObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/DataBricksFSAssetSource" },
+              { "$ref": "#/components/schemas/DualityLocalWorkloadSource" }
+            ],
+            "title": "Source",
+            "description": "Source of the asset"
+          },
+          "details": {
+            "oneOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/StructuredDataDetails" },
+                  { "$ref": "#/components/schemas/UnstructuredDataDetails" }
+                ]
+              },
+              { "$ref": "#/components/schemas/ModelDetails" },
+              { "$ref": "#/components/schemas/WorkloadDetails-Output" }
+            ],
+            "title": "Details",
+            "description": "Details of the asset values"
+          },
+          "projects": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AssetProjectDetails"
+            },
+            "type": "object",
+            "title": "Projects",
+            "description": "A dictionary of project ids to their asset details"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The time the asset was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The time the asset was last updated"
+          }
+        },
+        "type": "object",
+        "required": ["display_name", "user_id", "source", "details"],
+        "title": "Asset"
+      },
+      "AssetAssociationPayload": {
+        "properties": {
+          "asset_id": { "type": "string", "title": "Asset Id" },
+          "project_id": { "type": "string", "title": "Project Id" }
+        },
+        "type": "object",
+        "required": ["asset_id", "project_id"],
+        "title": "AssetAssociationPayload"
+      },
+      "AssetCreationPayload": {
+        "properties": {
+          "source": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/MySQLAssetSource" },
+              { "$ref": "#/components/schemas/PostgresAssetSource" },
+              { "$ref": "#/components/schemas/MsSQLAssetSource" },
+              { "$ref": "#/components/schemas/OracleAssetSource" },
+              { "$ref": "#/components/schemas/SnowflakeAssetSource" },
+              { "$ref": "#/components/schemas/GCPObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AWSObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AzureObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/DataBricksFSAssetSource" },
+              { "$ref": "#/components/schemas/DualityLocalWorkloadSource" }
+            ],
+            "title": "Source"
+          },
+          "details": {
+            "oneOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/StructuredDataDetailsPayload"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UnstructuredDataDetailsPayload"
+                  }
+                ]
+              },
+              { "$ref": "#/components/schemas/ModelDetailsPayload" },
+              { "$ref": "#/components/schemas/WorkloadDetailsPayload" }
+            ],
+            "title": "Details"
+          },
+          "display_name": { "type": "string", "title": "Display Name" },
+          "description": { "type": "string", "title": "Description" }
+        },
+        "type": "object",
+        "required": ["source", "details", "display_name"],
+        "title": "AssetCreationPayload"
+      },
+      "AssetCreationResponse": {
+        "properties": { "id": { "type": "string", "title": "Id" } },
+        "type": "object",
+        "required": ["id"],
+        "title": "AssetCreationResponse"
+      },
+      "AssetID": { "type": "string" },
+      "AssetOwnerConfig": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "use_encryption": {
+            "type": "boolean",
+            "title": "Use Encryption",
+            "description": "Whether to use encryption",
+            "default": true
+          },
+          "project_id": {
+            "type": "string",
+            "title": "Project Id",
+            "description": "The ID of the project the asset owner is associated with"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The time the asset owner config was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The time the asset owner config was last updated"
+          }
+        },
+        "type": "object",
+        "required": ["project_id"],
+        "title": "AssetOwnerConfig"
+      },
+      "AssetProjectDetails": {
+        "properties": {
+          "associated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Associated At",
+            "description": "The time the asset was associated with the project"
+          }
+        },
+        "type": "object",
+        "title": "AssetProjectDetails"
+      },
+      "AssetSchema": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "schema_values": { "$ref": "#/components/schemas/QuerySchema" },
+          "status": { "$ref": "#/components/schemas/SchemaStatus" },
+          "asset_id": { "type": "string", "title": "Asset Id" },
+          "project_id": { "type": "string", "title": "Project Id" },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "shared_at": {
+            "anyOf": [
+              { "type": "string", "format": "date-time" },
+              { "type": "null" }
+            ],
+            "title": "Shared At"
+          }
+        },
+        "type": "object",
+        "required": ["schema_values", "status", "asset_id", "project_id"],
+        "title": "AssetSchema"
+      },
+      "AssetType": {
+        "type": "string",
+        "enum": ["Data", "Workload", "Model"],
+        "title": "AssetType"
+      },
+      "AssetUpdatePayload": {
+        "properties": {
+          "source": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/MySQLAssetSource" },
+                  { "$ref": "#/components/schemas/PostgresAssetSource" },
+                  { "$ref": "#/components/schemas/MsSQLAssetSource" },
+                  { "$ref": "#/components/schemas/OracleAssetSource" },
+                  { "$ref": "#/components/schemas/SnowflakeAssetSource" },
+                  { "$ref": "#/components/schemas/GCPObjectStoreAssetSource" },
+                  { "$ref": "#/components/schemas/AWSObjectStoreAssetSource" },
+                  {
+                    "$ref": "#/components/schemas/AzureObjectStoreAssetSource"
+                  },
+                  { "$ref": "#/components/schemas/DataBricksFSAssetSource" },
+                  { "$ref": "#/components/schemas/DualityLocalWorkloadSource" }
+                ]
+              },
+              { "type": "null" }
+            ],
+            "title": "Source"
+          },
+          "display_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Display Name"
+          },
+          "description": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Description"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/StructuredDataDetailsPayload"
+                      },
+                      {
+                        "$ref": "#/components/schemas/UnstructuredDataDetailsPayload"
+                      }
+                    ]
+                  },
+                  { "$ref": "#/components/schemas/ModelDetailsPayload" },
+                  { "$ref": "#/components/schemas/WorkloadDetailsPayload" }
+                ]
+              },
+              { "type": "null" }
+            ],
+            "title": "Details"
+          }
+        },
+        "type": "object",
+        "title": "AssetUpdatePayload"
+      },
+      "AzureBlobStorage-Input": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AzureObjectStore",
+            "title": "Type"
+          },
+          "container_name": { "type": "string", "title": "Container Name" },
+          "path": { "type": "string", "title": "Path" },
+          "connection_string": {
+            "type": "string",
+            "title": "Connection String"
+          }
+        },
+        "type": "object",
+        "required": ["type", "container_name", "path", "connection_string"],
+        "title": "AzureBlobStorage"
+      },
+      "AzureBlobStorage-Output": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AzureObjectStore",
+            "title": "Type"
+          },
+          "container_name": { "type": "string", "title": "Container Name" },
+          "path": { "type": "string", "title": "Path" },
+          "connection_string": {
+            "type": "string",
+            "title": "Connection String"
+          },
+          "storage_account": {
+            "type": "string",
+            "title": "Storage Account",
+            "description": "Extracts the storage account name from an Azure Blob Storage connection string.",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "container_name",
+          "path",
+          "connection_string",
+          "storage_account"
+        ],
+        "title": "AzureBlobStorage"
+      },
+      "AzureBlobStorageLocation": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AzureObjectStore",
+            "title": "Type"
+          },
+          "container_name": { "type": "string", "title": "Container Name" },
+          "path": { "type": "string", "title": "Path" },
+          "storage_account": { "type": "string", "title": "Storage Account" }
+        },
+        "type": "object",
+        "required": ["type", "container_name", "path", "storage_account"],
+        "title": "AzureBlobStorageLocation"
+      },
+      "AzureObjectStoreAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "AzureObjectStore",
+            "title": "Type",
+            "description": "Connection type of the AWS object store"
+          },
+          "container_name": {
+            "type": "string",
+            "title": "Container Name",
+            "description": "Container name of the object store"
+          },
+          "connection_string": {
+            "type": "string",
+            "title": "Connection String",
+            "description": "Connection string composed from multiple properties. Example: DefaultEndpointsProtocol=https;AccountName=<name>;AccountKey=<key>;EndpointSuffix=core.windows.net"
+          },
+          "is_folder": {
+            "type": "boolean",
+            "title": "Is Folder",
+            "description": "If the store is a folder or a file"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "Sub path of the object in the bucket"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "container_name",
+          "connection_string",
+          "is_folder",
+          "path"
+        ],
+        "title": "AzureObjectStoreAssetSource"
+      },
+      "ConfigureEncryptionPayload": {
+        "properties": {
+          "use_encryption": {
+            "type": "boolean",
+            "title": "Use Encryption",
+            "description": "Whether the participant should use encryption for the project"
+          }
+        },
+        "type": "object",
+        "required": ["use_encryption"],
+        "title": "ConfigureEncryptionPayload"
+      },
+      "ConfigureOutputLocationPayload": {
+        "properties": {
+          "output_location": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/GCPObjectStore" },
+              { "$ref": "#/components/schemas/AWSS3" },
+              { "$ref": "#/components/schemas/AzureBlobStorage-Input" },
+              { "$ref": "#/components/schemas/LocalStorage" }
+            ],
+            "title": "Output Location",
+            "description": "Where to store the session output for the project",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "AWSObjectStore": "#/components/schemas/AWSS3",
+                "AzureObjectStore": "#/components/schemas/AzureBlobStorage-Input",
+                "GCPObjectStore": "#/components/schemas/GCPObjectStore",
+                "LocalStorage": "#/components/schemas/LocalStorage"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["output_location"],
+        "title": "ConfigureOutputLocationPayload"
+      },
+      "ConnectionTestPayload": {
+        "properties": {
+          "source": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/MySQLAssetSource" },
+              { "$ref": "#/components/schemas/PostgresAssetSource" },
+              { "$ref": "#/components/schemas/MsSQLAssetSource" },
+              { "$ref": "#/components/schemas/OracleAssetSource" },
+              { "$ref": "#/components/schemas/SnowflakeAssetSource" },
+              { "$ref": "#/components/schemas/GCPObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AWSObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AzureObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/DataBricksFSAssetSource" },
+              { "$ref": "#/components/schemas/DualityLocalWorkloadSource" }
+            ],
+            "title": "Source",
+            "description": "The asset source to test the connection for"
+          },
+          "details": {
+            "oneOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/StructuredDataDetails" },
+                  { "$ref": "#/components/schemas/UnstructuredDataDetails" }
+                ]
+              },
+              { "$ref": "#/components/schemas/ModelDetails" },
+              { "$ref": "#/components/schemas/WorkloadDetails-Input" }
+            ],
+            "title": "Details",
+            "description": "The asset details to test the connection for"
+          }
+        },
+        "type": "object",
+        "required": ["source", "details"],
+        "title": "ConnectionTestPayload"
+      },
+      "CreateResourceApiPayload": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Resource name",
+            "description": "Name of the resource"
+          },
+          "description": {
+            "type": "string",
+            "title": "Resource description",
+            "description": "Description of the resource",
+            "default": ""
+          },
+          "configuration": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/EnclaveConfig" },
+              { "$ref": "#/components/schemas/KMSKeyConfig" }
+            ],
+            "title": "Resource configuration",
+            "description": "Resource configuration",
+            "discriminator": {
+              "propertyName": "resource_type",
+              "mapping": {
+                "Enclave": "#/components/schemas/EnclaveConfig",
+                "KMSKey": "#/components/schemas/KMSKeyConfig"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["name", "configuration"],
+        "title": "CreateResourceApiPayload"
+      },
+      "CrossDomainSettings": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Cross domain settings ID",
+            "description": "ID of the cross domain settings"
+          },
+          "project_id": {
+            "type": "string",
+            "title": "Project ID",
+            "description": "ID of the project that the settings are associated with"
+          },
+          "local_storage_configuration": {
+            "$ref": "#/components/schemas/LocalStorageConfiguration",
+            "title": "Local storage configuration settings",
+            "description": "Settings for local storage configuration"
+          },
+          "integrity_validation": {
+            "$ref": "#/components/schemas/IntegrityValidationSettings",
+            "title": "Integrity validation settings",
+            "description": "Settings for integrity validation"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "resource creation time",
+            "description": "Time the resource was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "resource update time",
+            "description": "Time the resource was updated"
+          }
+        },
+        "type": "object",
+        "required": ["project_id"],
+        "title": "CrossDomainSettings"
+      },
+      "CrossDomainSettingsCreatePayload": {
+        "properties": {
+          "local_storage_configuration": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/LocalStorageConfiguration" },
+              { "type": "null" }
+            ],
+            "title": "Local storage configuration settings",
+            "description": "Settings for local storage configuration"
+          },
+          "integrity_validation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrityValidationSettingsCreate"
+              },
+              { "type": "null" }
+            ],
+            "title": "Integrity validation settings",
+            "description": "Settings for integrity validation"
+          }
+        },
+        "type": "object",
+        "title": "CrossDomainSettingsCreatePayload"
+      },
+      "CrossDomainSettingsDeletionResponse": {
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "title": "Project ID",
+            "description": "The ID of the project from which the cross domain settings were deleted."
+          }
+        },
+        "type": "object",
+        "required": ["project_id"],
+        "title": "CrossDomainSettingsDeletionResponse"
+      },
+      "CrossDomainSettingsUpdatePayload": {
+        "properties": {
+          "local_storage_configuration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LocalStorageConfigurationUpdate"
+              },
+              { "type": "null" }
+            ],
+            "title": "Local storage configuration settings",
+            "description": "Settings for local storage configuration"
+          },
+          "integrity_validation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrityValidationSettingsUpdate"
+              },
+              { "type": "null" }
+            ],
+            "title": "Integrity validation settings",
+            "description": "Settings for integrity validation"
+          }
+        },
+        "type": "object",
+        "title": "CrossDomainSettingsUpdatePayload"
+      },
+      "DataBricksFSAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "DatabricksFileSystem",
+            "title": "Type",
+            "description": "Connection type of the databricks file system"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host",
+            "description": "The host URL of the databricks workspace"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token",
+            "description": "The authentication token of the databricks workspace"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "The path of the selected asset source in the workspace"
+          },
+          "is_folder": {
+            "type": "boolean",
+            "title": "Is Folder",
+            "description": "Is the selected source a folder or a single file"
+          }
+        },
+        "type": "object",
+        "required": ["type", "host", "token", "path", "is_folder"],
+        "title": "DataBricksFSAssetSource"
+      },
+      "DataStoreType": {
+        "type": "string",
+        "enum": ["Tabular", "Media", "Text", "Geospatial", "Other"],
+        "title": "DataStoreType"
+      },
+      "DatasetAssetShare": {
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "const": "Data",
+            "title": "Asset Type",
+            "description": "Type of asset"
+          },
+          "asset_id": {
+            "type": "string",
+            "title": "Asset Id",
+            "description": "ID of the asset"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the asset"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the asset"
+          },
+          "associated_at": {
+            "type": "string",
+            "title": "Associated At",
+            "description": "Date of association of the asset"
+          },
+          "data_type": {
+            "$ref": "#/components/schemas/DataStoreType",
+            "description": "Type of data stored in the dataset"
+          },
+          "columns": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Columns",
+            "description": "Columns of the dataset"
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "asset_id",
+          "name",
+          "description",
+          "data_type"
+        ],
+        "title": "DatasetAssetShare"
+      },
+      "DualityLocalWorkloadSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "DualityLocalWorkload",
+            "title": "Type",
+            "description": "Connection type of the local disk"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "Path to the workload file in the local disk"
+          }
+        },
+        "type": "object",
+        "required": ["type", "path"],
+        "title": "DualityLocalWorkloadSource"
+      },
+      "EnclaveConfig": {
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "const": "Enclave",
+            "title": "resource type",
+            "description": "type of the resource"
+          },
+          "enclave_type": {
+            "$ref": "#/components/schemas/EnclaveType",
+            "title": "Enclave type",
+            "description": "Type of enclave"
+          },
+          "config": {
+            "type": "object",
+            "title": "Enclave configuration",
+            "description": "Configuration of the enclave"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["resource_type", "enclave_type", "config"],
+        "title": "EnclaveConfig"
+      },
+      "EnclaveShare": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "title": "Participant Id",
+            "description": "ID of the participant that owns the enclave"
+          }
+        },
+        "type": "object",
+        "required": ["participant_id"],
+        "title": "EnclaveShare"
+      },
+      "EnclaveType": {
+        "type": "string",
+        "enum": ["GCPConfVM"],
+        "title": "EnclaveType",
+        "description": "The type of the enclave."
+      },
+      "FLSessionParamWorkloadDetails": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Workload id",
+            "description": "The workload id"
+          },
+          "type": {
+            "type": "string",
+            "const": "Federated",
+            "title": "Workload type",
+            "description": "Federated workload type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Workload name",
+            "description": "The workload name"
+          },
+          "participant_id": {
+            "type": "string",
+            "title": "Participant id",
+            "description": "The participant id of the workload"
+          },
+          "description": {
+            "type": "string",
+            "title": "Workload description",
+            "description": "The workload description"
+          },
+          "result_description": {
+            "type": "string",
+            "title": "Workload result description",
+            "description": "Description of the workload output"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AISessionParamWorkloadParameterDetails"
+            },
+            "type": "object",
+            "title": "Workload parameters",
+            "description": "Parameters needed to pass to the workload entrypoint (Parameter name mapped to the details)"
+          },
+          "assets": {
+            "items": {
+              "$ref": "#/components/schemas/AISessionParamAssetDetails"
+            },
+            "type": "array",
+            "title": "Assets",
+            "description": "The assets that are used with the workload"
+          },
+          "filters": {
+            "anyOf": [
+              { "items": { "type": "string" }, "type": "array" },
+              { "type": "null" }
+            ],
+            "title": "Filters",
+            "description": "The filters to be used with the workload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name",
+          "participant_id",
+          "description",
+          "result_description",
+          "parameters",
+          "assets"
+        ],
+        "title": "FLSessionParamWorkloadDetails"
+      },
+      "FLStartSessionPayloadWorkload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The workload id"
+          },
+          "type": {
+            "type": "string",
+            "const": "Federated",
+            "title": "Type",
+            "description": "Federated workload type"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "anyOf": [
+                { "type": "number" },
+                { "type": "string" },
+                { "$ref": "#/components/schemas/AssetID" }
+              ]
+            },
+            "type": "object",
+            "title": "Parameters",
+            "description": "The parameters to be used in the workload"
+          },
+          "assets": {
+            "items": { "$ref": "#/components/schemas/AssetID" },
+            "type": "array",
+            "title": "Assets",
+            "description": "The assets to be used with the workload"
+          },
+          "filters": {
+            "anyOf": [
+              { "items": { "type": "string" }, "type": "array" },
+              { "type": "null" }
+            ],
+            "title": "Filters",
+            "description": "The filters to be used with the workload"
+          }
+        },
+        "type": "object",
+        "required": ["id", "type", "parameters", "assets"],
+        "title": "FLStartSessionPayloadWorkload"
+      },
+      "GCPObjectStore": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "GCPObjectStore",
+            "title": "Type"
+          },
+          "bucket": { "type": "string", "title": "Bucket" },
+          "credentials": { "type": "string", "title": "Credentials" },
+          "path": { "type": "string", "title": "Path" }
+        },
+        "type": "object",
+        "required": ["type", "bucket", "credentials", "path"],
+        "title": "GCPObjectStore"
+      },
+      "GCPObjectStoreAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "GCPObjectStore",
+            "title": "Type",
+            "description": "Connection type of the GCP object store"
+          },
+          "bucket": {
+            "type": "string",
+            "title": "Bucket",
+            "description": "Bucket name of the object store"
+          },
+          "credentials": {
+            "type": "string",
+            "title": "Credentials",
+            "description": "Credentials object of the object store (Provided by Google Cloud)"
+          },
+          "is_folder": {
+            "type": "boolean",
+            "title": "Is Folder",
+            "description": "If the store is a folder or a file"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "Sub path of the object in the bucket"
+          }
+        },
+        "type": "object",
+        "required": ["type", "bucket", "credentials", "is_folder", "path"],
+        "title": "GCPObjectStoreAssetSource"
+      },
+      "GCPObjectStoreLocation": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "GCPObjectStore",
+            "title": "Type"
+          },
+          "bucket": { "type": "string", "title": "Bucket" },
+          "path": { "type": "string", "title": "Path" }
+        },
+        "type": "object",
+        "required": ["type", "bucket", "path"],
+        "title": "GCPObjectStoreLocation"
+      },
+      "GetColumnsPayload": {
+        "properties": {
+          "source": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/MySQLAssetSource" },
+              { "$ref": "#/components/schemas/PostgresAssetSource" },
+              { "$ref": "#/components/schemas/MsSQLAssetSource" },
+              { "$ref": "#/components/schemas/OracleAssetSource" },
+              { "$ref": "#/components/schemas/SnowflakeAssetSource" },
+              { "$ref": "#/components/schemas/GCPObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AWSObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/AzureObjectStoreAssetSource" },
+              { "$ref": "#/components/schemas/DataBricksFSAssetSource" },
+              { "$ref": "#/components/schemas/DualityLocalWorkloadSource" }
+            ],
+            "title": "Source",
+            "description": "The asset source to get columns for"
+          },
+          "details": {
+            "oneOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/StructuredDataDetails" },
+                  { "$ref": "#/components/schemas/UnstructuredDataDetails" }
+                ]
+              },
+              { "$ref": "#/components/schemas/ModelDetails" },
+              { "$ref": "#/components/schemas/WorkloadDetails-Input" }
+            ],
+            "title": "Details",
+            "description": "The asset details to get columns for"
+          }
+        },
+        "type": "object",
+        "required": ["source", "details"],
+        "title": "GetColumnsPayload"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IntegrityValidationInputCommunication": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Integrity validation input communication enabled",
+            "description": "If integrity validation input communication is enabled",
+            "default": false
+          },
+          "public_key": {
+            "type": "string",
+            "title": "Integrity validation public key",
+            "description": "Public key for integrity validation",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationInputCommunication"
+      },
+      "IntegrityValidationInputCommunicationUpdate": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Integrity validation input communication enabled",
+            "description": "If integrity validation input communication is enabled",
+            "default": false
+          },
+          "public_key": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Integrity validation public key",
+            "description": "Public key for integrity validation"
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationInputCommunicationUpdate"
+      },
+      "IntegrityValidationOutputCommunication": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Integrity validation output communication enabled",
+            "description": "If integrity validation output communication is enabled",
+            "default": false
+          },
+          "private_key": {
+            "type": "string",
+            "title": "Integrity signature private key",
+            "description": "Private key for integrity signature",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationOutputCommunication"
+      },
+      "IntegrityValidationOutputCommunicationUpdate": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Integrity validation output communication enabled",
+            "description": "If integrity validation output communication is enabled",
+            "default": false
+          },
+          "private_key": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Integrity signature private key",
+            "description": "Private key for integrity signature"
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationOutputCommunicationUpdate"
+      },
+      "IntegrityValidationSettings": {
+        "properties": {
+          "input_communication": {
+            "$ref": "#/components/schemas/IntegrityValidationInputCommunication",
+            "title": "Integrity validation input communication",
+            "description": "Settings for integrity validation input communication"
+          },
+          "output_communication": {
+            "$ref": "#/components/schemas/IntegrityValidationOutputCommunication",
+            "title": "Integrity validation output communication",
+            "description": "Settings for integrity validation output communication"
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationSettings"
+      },
+      "IntegrityValidationSettingsCreate": {
+        "properties": {
+          "input_communication": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrityValidationInputCommunication"
+              },
+              { "type": "null" }
+            ],
+            "title": "Integrity validation input communication",
+            "description": "Settings for integrity validation input communication"
+          },
+          "output_communication": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrityValidationOutputCommunication"
+              },
+              { "type": "null" }
+            ],
+            "title": "Integrity validation output communication",
+            "description": "Settings for integrity validation output communication"
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationSettingsCreate"
+      },
+      "IntegrityValidationSettingsUpdate": {
+        "properties": {
+          "input_communication": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrityValidationInputCommunicationUpdate"
+              },
+              { "type": "null" }
+            ],
+            "title": "Integrity validation input communication",
+            "description": "Settings for integrity validation input communication"
+          },
+          "output_communication": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrityValidationOutputCommunicationUpdate"
+              },
+              { "type": "null" }
+            ],
+            "title": "Integrity validation output communication",
+            "description": "Settings for integrity validation output communication"
+          }
+        },
+        "type": "object",
+        "title": "IntegrityValidationSettingsUpdate"
+      },
+      "KMSKeyConfig": {
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "const": "KMSKey",
+            "title": "resource type",
+            "description": "type of the resource"
+          },
+          "kms_key_type": {
+            "$ref": "#/components/schemas/KMSKeyType",
+            "title": "KMS key type",
+            "description": "Type of KMS key"
+          },
+          "config": {
+            "type": "object",
+            "title": "KMS key configuration",
+            "description": "Configuration of the KMS key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["resource_type", "kms_key_type", "config"],
+        "title": "KMSKeyConfig"
+      },
+      "KMSKeyType": {
+        "type": "string",
+        "enum": ["GCP_KMS", "Duality_KMS"],
+        "title": "KMSKeyType",
+        "description": "The type of the KMS key."
+      },
+      "LocalStorage": {
+        "properties": {
+          "type": { "type": "string", "const": "LocalStorage", "title": "Type" }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "LocalStorage"
+      },
+      "LocalStorageConfiguration": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Local storage configuration enabled",
+            "description": "If local storage configuration is enabled",
+            "default": false
+          },
+          "bucket_name": {
+            "type": "string",
+            "title": "Local storage configuration bucket name",
+            "description": "Name of the bucket for local storage configuration",
+            "default": ""
+          },
+          "access_key": {
+            "type": "string",
+            "title": "Local storage configuration access key",
+            "description": "Access key for local storage configuration",
+            "default": ""
+          },
+          "secret_key": {
+            "type": "string",
+            "title": "Local storage configuration secret key",
+            "description": "Secret key for local storage configuration",
+            "default": ""
+          },
+          "expiration": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Bucket expiration time",
+            "description": "Expiration time in days for objects in the bucket, if None, objects will not expire",
+            "default": 7
+          }
+        },
+        "type": "object",
+        "title": "LocalStorageConfiguration"
+      },
+      "LocalStorageConfigurationUpdate": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Local storage configuration enabled",
+            "description": "If local storage configuration is enabled",
+            "default": false
+          },
+          "bucket_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Local storage configuration bucket name",
+            "description": "Name of the bucket for local storage configuration"
+          },
+          "access_key": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Local storage configuration access key",
+            "description": "Access key for local storage configuration"
+          },
+          "secret_key": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Local storage configuration secret key",
+            "description": "Secret key for local storage configuration"
+          },
+          "expiration": {
+            "anyOf": [
+              { "type": "integer", "minimum": 0.0 },
+              { "type": "null" }
+            ],
+            "title": "Bucket expiration time",
+            "description": "Expiration time for objects in the bucket"
+          }
+        },
+        "type": "object",
+        "title": "LocalStorageConfigurationUpdate"
+      },
+      "LocalStorageLocation": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "LocalStorage",
+            "title": "Type"
+          },
+          "content": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": ["type", "content"],
+        "title": "LocalStorageLocation"
+      },
+      "ModelAssetShare": {
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "const": "Model",
+            "title": "Asset Type",
+            "description": "Type of asset"
+          },
+          "asset_id": {
+            "type": "string",
+            "title": "Asset Id",
+            "description": "ID of the asset"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the asset"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the asset"
+          },
+          "associated_at": {
+            "type": "string",
+            "title": "Associated At",
+            "description": "Date of association of the asset"
+          }
+        },
+        "type": "object",
+        "required": ["asset_type", "asset_id", "name", "description"],
+        "title": "ModelAssetShare"
+      },
+      "ModelDetails": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Model",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "ModelDetails"
+      },
+      "ModelDetailsPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Model",
+            "title": "Type",
+            "description": "Type of the asset"
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "ModelDetailsPayload"
+      },
+      "MsSQLAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "MsSQL",
+            "title": "Type",
+            "description": "Connection type of the MS SQL database"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host",
+            "description": "Host URL of the MS SQL database"
+          },
+          "port": {
+            "type": "integer",
+            "title": "Port",
+            "description": "Port of the MS SQL database"
+          },
+          "user": {
+            "type": "string",
+            "title": "User",
+            "description": "Username to the MS SQL database"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "Password to the MS SQL database"
+          },
+          "database": {
+            "type": "string",
+            "title": "Database",
+            "description": "Database name in the MS SQL database"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table",
+            "description": "Table name in the MS SQL database"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "host",
+          "port",
+          "user",
+          "password",
+          "database",
+          "table"
+        ],
+        "title": "MsSQLAssetSource"
+      },
+      "MySQLAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "MySQL",
+            "title": "Type",
+            "description": "Connection type of the MySQL database"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host",
+            "description": "Host URL of the MySQL database"
+          },
+          "port": {
+            "type": "integer",
+            "title": "Port",
+            "description": "Port of the MySQL database"
+          },
+          "user": {
+            "type": "string",
+            "title": "User",
+            "description": "Username to the MySQL database"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "Password to the MySQL database"
+          },
+          "database": {
+            "type": "string",
+            "title": "Database",
+            "description": "Database name in the MySQL database"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table",
+            "description": "Table name in the MySQL database"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "host",
+          "port",
+          "user",
+          "password",
+          "database",
+          "table"
+        ],
+        "title": "MySQLAssetSource"
+      },
+      "NewAssetSchemaPayload": {
+        "properties": {
+          "schema_type": { "$ref": "#/components/schemas/SchemaType" },
+          "asset_id": { "type": "string", "title": "Asset Id" },
+          "project_id": { "type": "string", "title": "Project Id" }
+        },
+        "type": "object",
+        "required": ["schema_type", "asset_id", "project_id"],
+        "title": "NewAssetSchemaPayload"
+      },
+      "NewSchemaResponse": {
+        "properties": { "id": { "type": "string", "title": "Id" } },
+        "type": "object",
+        "required": ["id"],
+        "title": "NewSchemaResponse"
+      },
+      "OracleAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Oracle",
+            "title": "Type",
+            "description": "Connection type of the Oracle database"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host",
+            "description": "Host URL of the Oracle database"
+          },
+          "port": {
+            "type": "integer",
+            "title": "Port",
+            "description": "Port of the Oracle database"
+          },
+          "user": {
+            "type": "string",
+            "title": "User",
+            "description": "Username to the Oracle database"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "Password to the Oracle database"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table",
+            "description": "Table name in the Oracle database"
+          },
+          "service_name": {
+            "type": "string",
+            "title": "Service Name",
+            "description": "Service name in the Oracle database"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "host",
+          "port",
+          "user",
+          "password",
+          "table",
+          "service_name"
+        ],
+        "title": "OracleAssetSource"
+      },
+      "ParticipantId": { "type": "string" },
+      "ParticipantProjectConfig": {
+        "properties": {
+          "project_config": {
+            "$ref": "#/components/schemas/AIProjectConfig",
+            "description": "Global project configuration"
+          },
+          "AnalyzingParty": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/AnalyzingPartyConfig" },
+              { "type": "null" }
+            ],
+            "description": "Analyzing party AI project configuration"
+          },
+          "AssetOwner": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/AssetOwnerConfig" },
+              { "type": "null" }
+            ],
+            "description": "Asset owner AI project configuration"
+          }
+        },
+        "type": "object",
+        "required": ["project_config", "AnalyzingParty", "AssetOwner"],
+        "title": "ParticipantProjectConfig"
+      },
+      "ParticipantRole": {
+        "type": "string",
+        "enum": [
+          "Inquirer",
+          "HUB",
+          "DataOwner",
+          "Initiator",
+          "AssetOwner",
+          "Compute",
+          "AnalyzingParty"
+        ],
+        "title": "ParticipantRole"
+      },
+      "ParticipantRoleReadiness": {
+        "properties": {
+          "ready": {
+            "type": "boolean",
+            "title": "Ready",
+            "description": "The readiness status of the participant role"
+          }
+        },
+        "type": "object",
+        "required": ["ready"],
+        "title": "ParticipantRoleReadiness"
+      },
+      "PostgresAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Postgres",
+            "title": "Type",
+            "description": "Connection type of the Postgres database"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host",
+            "description": "Host URL of the Postgres database"
+          },
+          "port": {
+            "type": "integer",
+            "title": "Port",
+            "description": "Port of the Postgres database"
+          },
+          "user": {
+            "type": "string",
+            "title": "User",
+            "description": "Username to the Postgres database"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "Password to the Postgres database"
+          },
+          "database": {
+            "type": "string",
+            "title": "Database",
+            "description": "Database name in the Postgres database"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table",
+            "description": "Table name in the Postgres database"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "host",
+          "port",
+          "user",
+          "password",
+          "database",
+          "table"
+        ],
+        "title": "PostgresAssetSource"
+      },
+      "PrivacySetting": {
+        "properties": {
+          "is_enabled": { "type": "boolean", "title": "Is Enabled" },
+          "value": {
+            "anyOf": [
+              { "type": "number" },
+              { "type": "integer" },
+              { "type": "null" }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": ["is_enabled"],
+        "title": "PrivacySetting"
+      },
+      "PrivacySettingsSection": {
+        "properties": {
+          "differential_privacy": {
+            "$ref": "#/components/schemas/PrivacySetting",
+            "description": "Differential privacy settings",
+            "default": { "is_enabled": false }
+          },
+          "minimal_count_threshold": {
+            "$ref": "#/components/schemas/PrivacySetting",
+            "description": "Minimal count threshold settings",
+            "default": { "is_enabled": false }
+          }
+        },
+        "type": "object",
+        "title": "PrivacySettingsSection"
+      },
+      "ProjectRolesReadiness": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the project the participant status is associated with (only a single instance of this model is allowed per project)"
+          },
+          "roles_readiness": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "$ref": "#/components/schemas/ParticipantRoleReadiness"
+              },
+              "propertyNames": {
+                "$ref": "#/components/schemas/ParticipantRole"
+              },
+              "type": "object"
+            },
+            "propertyNames": { "$ref": "#/components/schemas/ParticipantId" },
+            "type": "object",
+            "title": "Roles Readiness",
+            "description": "The readiness of the project participants roles"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The time the asset owner config was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The time the asset owner config was last updated"
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "ProjectRolesReadiness"
+      },
+      "QuerySchema": {
+        "properties": {
+          "type": { "$ref": "#/components/schemas/SchemaType" },
+          "discovered_schema": {
+            "type": "object",
+            "title": "Discovered Schema",
+            "description": "The schema that was created from the discovery process"
+          },
+          "applied_schema": {
+            "type": "object",
+            "title": "Applied Schema",
+            "description": "The schema that is applied"
+          },
+          "conversions": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Conversions",
+            "description": "A mapping of the field name to their new type"
+          },
+          "unverified_fields": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Unverified Fields",
+            "description": "A list of fields that were not verified by CFW"
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "QuerySchema"
+      },
+      "QueryUpdateRequet": {
+        "properties": {
+          "type": { "$ref": "#/components/schemas/SchemaType" },
+          "asset_schema": {
+            "type": "object",
+            "title": "Asset Schema",
+            "description": "Values of the asset schema to be saved.             Recomended to copy the existing schema, and to update it with the new fields, or to submit as is for saving"
+          }
+        },
+        "type": "object",
+        "required": ["type", "asset_schema"],
+        "title": "QueryUpdateRequet"
+      },
+      "ReadyForSession": {
+        "properties": {
+          "centralized": {
+            "type": "boolean",
+            "title": "Centralized",
+            "description": "Whether the AI project is ready for a centralized session",
+            "default": false
+          },
+          "federated": {
+            "type": "boolean",
+            "title": "Federated",
+            "description": "Whether the AI project is ready for a federated session",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ReadyForSession"
+      },
+      "Resource": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Resource name",
+            "description": "Name of the resource"
+          },
+          "description": {
+            "type": "string",
+            "title": "resource description",
+            "description": "Description of the resource",
+            "default": ""
+          },
+          "projects": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ResourceProjectDetails"
+            },
+            "type": "object",
+            "title": "Projects",
+            "description": "A dictionary of project ids to their resource details"
+          },
+          "configuration": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/EnclaveConfig" },
+              { "$ref": "#/components/schemas/KMSKeyConfig" }
+            ],
+            "title": "resource configuration",
+            "description": "configuration of the resource",
+            "discriminator": {
+              "propertyName": "resource_type",
+              "mapping": {
+                "Enclave": "#/components/schemas/EnclaveConfig",
+                "KMSKey": "#/components/schemas/KMSKeyConfig"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "title": "resource ID",
+            "description": "ID of the resource"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User ID",
+            "description": "ID of the user that created the resource"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "resource creation time",
+            "description": "Time the resource was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "resource update time",
+            "description": "Time the resource was updated"
+          }
+        },
+        "type": "object",
+        "required": ["name", "configuration", "user_id"],
+        "title": "Resource"
+      },
+      "ResourceAssociationPayload": {
+        "properties": {
+          "resource_id": { "type": "string", "title": "Resource Id" },
+          "project_id": { "type": "string", "title": "Project Id" }
+        },
+        "type": "object",
+        "required": ["resource_id", "project_id"],
+        "title": "ResourceAssociationPayload"
+      },
+      "ResourceIdResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Resource ID",
+            "description": "ID of the resource"
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "ResourceIdResponse"
+      },
+      "ResourceProjectDetails": {
+        "properties": {
+          "associated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Associated At"
+          }
+        },
+        "type": "object",
+        "title": "ResourceProjectDetails"
+      },
+      "ResourceType": {
+        "type": "string",
+        "enum": ["Enclave", "KMSKey"],
+        "title": "ResourceType"
+      },
+      "RunDiscoveryPayload": {
+        "properties": {
+          "columns": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Columns"
+          }
+        },
+        "type": "object",
+        "required": ["columns"],
+        "title": "RunDiscoveryPayload"
+      },
+      "SchemaStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Creating",
+          "Created",
+          "Ready",
+          "DiscoveryFailed",
+          "UpdateFailed"
+        ],
+        "title": "SchemaStatus"
+      },
+      "SchemaType": {
+        "type": "string",
+        "enum": ["Query"],
+        "title": "SchemaType"
+      },
+      "SessionFailureMetadata": {
+        "properties": {
+          "failed_task_id": {
+            "type": "string",
+            "title": "Failed task id",
+            "description": "The failed task id"
+          }
+        },
+        "type": "object",
+        "required": ["failed_task_id"],
+        "title": "SessionFailureMetadata"
+      },
+      "SessionIDAPIResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session ID",
+            "description": "The session ID of the AI session"
+          }
+        },
+        "type": "object",
+        "required": ["session_id"],
+        "title": "SessionIDAPIResponse"
+      },
+      "SessionInitiator": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "title": "Participant id",
+            "description": "The session initiator participant id"
+          },
+          "user": {
+            "type": "string",
+            "title": "User",
+            "description": "The session initiator user"
+          }
+        },
+        "type": "object",
+        "required": ["participant_id", "user"],
+        "title": "SessionInitiator"
+      },
+      "SessionParticipant": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Session participant name",
+            "description": "Session participant name"
+          },
+          "roles": {
+            "items": { "$ref": "#/components/schemas/ParticipantRole" },
+            "type": "array",
+            "title": "Session participant roles",
+            "description": "Session participant roles"
+          },
+          "approval": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Session approval",
+            "description": "Wether the session is approved"
+          }
+        },
+        "type": "object",
+        "required": ["name", "roles"],
+        "title": "SessionParticipant"
+      },
+      "SessionStatus": {
+        "type": "string",
+        "enum": [
+          "CREATED",
+          "PENDING_APPROVAL",
+          "RUNNING",
+          "COMPLETED",
+          "FAILED",
+          "TIMED_OUT",
+          "TERMINATED",
+          "APPROVAL_DENIED"
+        ],
+        "title": "SessionStatus"
+      },
+      "SnowflakeAssetSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Snowflake",
+            "title": "Type",
+            "description": "Connection type of the Snowflake database"
+          },
+          "account": {
+            "type": "string",
+            "title": "Account",
+            "description": "Snowflake account name"
+          },
+          "warehouse": {
+            "type": "string",
+            "title": "Warehouse",
+            "description": "Snowflake warehouse name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "description": "Snowflake role name"
+          },
+          "user": {
+            "type": "string",
+            "title": "User",
+            "description": "Snowflake user name"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "Snowflake password"
+          },
+          "database": {
+            "type": "string",
+            "title": "Database",
+            "description": "Snowflake database name"
+          },
+          "table": {
+            "type": "string",
+            "title": "Table",
+            "description": "Snowflake table name"
+          },
+          "connection_schema": {
+            "type": "string",
+            "title": "Connection Schema",
+            "description": "Snowflake connection schema"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "account",
+          "warehouse",
+          "role",
+          "user",
+          "password",
+          "database",
+          "table",
+          "connection_schema"
+        ],
+        "title": "SnowflakeAssetSource"
+      },
+      "StartSessionPayload": {
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "title": "Project id",
+            "description": "The project id to create the session in"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display name",
+            "description": "The display name of the session"
+          },
+          "analyzing_party_ids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Analyzing party ids",
+            "description": "The ids of analyzing parties participants in the session"
+          },
+          "workload": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/TEEStartSessionPayloadWorkload" },
+              { "$ref": "#/components/schemas/FLStartSessionPayloadWorkload" }
+            ],
+            "title": "Workload",
+            "description": "Workload configuration needed to be passed to the start session endpoint",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "Centralized": "#/components/schemas/TEEStartSessionPayloadWorkload",
+                "Federated": "#/components/schemas/FLStartSessionPayloadWorkload"
+              }
+            }
+          },
+          "note": {
+            "type": "string",
+            "title": "Note",
+            "description": "The session note",
+            "default": ""
+          },
+          "session_send_results_notification": {
+            "type": "boolean",
+            "title": "Session send results notification",
+            "description": "Wether the session should send results notification (Email)",
+            "default": false
+          },
+          "session_timeout_sec": {
+            "type": "integer",
+            "title": "Session timeout",
+            "description": "The session timeout in seconds",
+            "default": 18000
+          }
+        },
+        "type": "object",
+        "required": [
+          "project_id",
+          "display_name",
+          "analyzing_party_ids",
+          "workload"
+        ],
+        "title": "StartSessionPayload"
+      },
+      "StringLocalParameter": {
+        "properties": {
+          "value": { "anyOf": [{}, { "type": "null" }], "title": "Value" }
+        },
+        "type": "object",
+        "title": "StringLocalParameter"
+      },
+      "StructuredDataDetails": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Data",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          },
+          "structure": {
+            "type": "string",
+            "const": "Structured",
+            "title": "Structure",
+            "description": "The structure of the data"
+          },
+          "columns": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Columns",
+            "description": "Columns found in the structured data mapped to their data type"
+          }
+        },
+        "type": "object",
+        "required": ["type", "structure"],
+        "title": "StructuredDataDetails"
+      },
+      "StructuredDataDetailsPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Data",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          },
+          "structure": {
+            "type": "string",
+            "const": "Structured",
+            "title": "Structure",
+            "description": "Strucutre of the data storage"
+          }
+        },
+        "type": "object",
+        "required": ["type", "structure"],
+        "title": "StructuredDataDetailsPayload"
+      },
+      "Supervisor": {
+        "type": "string",
+        "enum": [
+          "SPQSupervisor",
+          "IQSupervisor",
+          "TEESupervisor",
+          "FLSupervisor"
+        ],
+        "title": "Supervisor"
+      },
+      "TEESessionParamWorkloadDetails": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Workload id",
+            "description": "The workload id"
+          },
+          "type": {
+            "type": "string",
+            "const": "Centralized",
+            "title": "Workload type",
+            "description": "Centralized workload type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Workload name",
+            "description": "The workload name"
+          },
+          "participant_id": {
+            "type": "string",
+            "title": "Participant id",
+            "description": "The participant id of the workload"
+          },
+          "description": {
+            "type": "string",
+            "title": "Workload description",
+            "description": "The workload description"
+          },
+          "result_description": {
+            "type": "string",
+            "title": "Workload result description",
+            "description": "Description of the workload output"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AISessionParamWorkloadParameterDetails"
+            },
+            "type": "object",
+            "title": "Workload parameters",
+            "description": "Parameters needed to pass to the workload entrypoint (Parameter name mapped to the details)"
+          },
+          "assets": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AISessionParamAssetDetails"
+            },
+            "type": "object",
+            "title": "Assets",
+            "description": "Mapping of the workload parameter name (of type asset) to the asset id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name",
+          "participant_id",
+          "description",
+          "result_description",
+          "parameters",
+          "assets"
+        ],
+        "title": "TEESessionParamWorkloadDetails"
+      },
+      "TEEStartSessionPayloadWorkload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The workload id"
+          },
+          "type": {
+            "type": "string",
+            "const": "Centralized",
+            "title": "Type",
+            "description": "Federated workload type"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "anyOf": [
+                { "type": "number" },
+                { "type": "string" },
+                { "$ref": "#/components/schemas/AssetID" }
+              ]
+            },
+            "type": "object",
+            "title": "Parameters",
+            "description": "The parameters to be used in the workload"
+          },
+          "assets": {
+            "additionalProperties": { "$ref": "#/components/schemas/AssetID" },
+            "type": "object",
+            "title": "Assets",
+            "description": "Mapping of the workload parameter name (of type asset) to the asset id"
+          }
+        },
+        "type": "object",
+        "required": ["id", "type", "parameters", "assets"],
+        "title": "TEEStartSessionPayloadWorkload"
+      },
+      "UnstructuredDataDetails": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Data",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          },
+          "structure": {
+            "type": "string",
+            "const": "Unstructured",
+            "title": "Structure",
+            "description": "The structure of the data"
+          },
+          "data_type": {
+            "$ref": "#/components/schemas/DataStoreType",
+            "description": "Type of data being stored in the storeage",
+            "default": "Other"
+          }
+        },
+        "type": "object",
+        "required": ["type", "structure"],
+        "title": "UnstructuredDataDetails"
+      },
+      "UnstructuredDataDetailsPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Data",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          },
+          "structure": {
+            "type": "string",
+            "const": "Unstructured",
+            "title": "Structure",
+            "description": "Strucutre of the data storage"
+          },
+          "data_type": {
+            "$ref": "#/components/schemas/DataStoreType",
+            "description": "The type of data being stored in the storeage",
+            "default": "Other"
+          }
+        },
+        "type": "object",
+        "required": ["type", "structure"],
+        "title": "UnstructuredDataDetailsPayload"
+      },
+      "UpdateAssetSchemaPayload": {
+        "properties": {
+          "schema_values": { "$ref": "#/components/schemas/QueryUpdateRequet" }
+        },
+        "type": "object",
+        "required": ["schema_values"],
+        "title": "UpdateAssetSchemaPayload"
+      },
+      "UpdatePayloadEnclaveConfig": {
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "const": "Enclave",
+            "title": "resource type",
+            "description": "type of the resource"
+          },
+          "config": {
+            "anyOf": [{ "type": "object" }, { "type": "null" }],
+            "title": "Enclave configuration",
+            "description": "Configuration of the enclave"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["resource_type"],
+        "title": "UpdatePayloadEnclaveConfig"
+      },
+      "UpdatePayloadKMSKeyConfig": {
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "const": "KMSKey",
+            "title": "resource type",
+            "description": "type of the resource"
+          },
+          "config": {
+            "anyOf": [{ "type": "object" }, { "type": "null" }],
+            "title": "KMS key configuration",
+            "description": "Configuration of the kms key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["resource_type"],
+        "title": "UpdatePayloadKMSKeyConfig"
+      },
+      "UpdateResourceApiPayload": {
+        "properties": {
+          "name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Resource name",
+            "description": "Updated name of the resource"
+          },
+          "description": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Resource description",
+            "description": "Description of the resource"
+          },
+          "configuration": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/UpdatePayloadEnclaveConfig" },
+                  { "$ref": "#/components/schemas/UpdatePayloadKMSKeyConfig" }
+                ],
+                "discriminator": {
+                  "propertyName": "resource_type",
+                  "mapping": {
+                    "Enclave": "#/components/schemas/UpdatePayloadEnclaveConfig",
+                    "KMSKey": "#/components/schemas/UpdatePayloadKMSKeyConfig"
+                  }
+                }
+              },
+              { "type": "null" }
+            ],
+            "title": "Resource configuration update payload",
+            "description": "Updated resource configuration"
+          }
+        },
+        "type": "object",
+        "title": "UpdateResourceApiPayload"
+      },
+      "UserDetailsResponse": {
+        "properties": {
+          "display_name": { "type": "string", "title": "Display Name" }
+        },
+        "type": "object",
+        "required": ["display_name"],
+        "title": "UserDetailsResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "WorkloadAssetShare": {
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "const": "Workload",
+            "title": "Asset Type",
+            "description": "Type of asset"
+          },
+          "asset_id": {
+            "type": "string",
+            "title": "Asset Id",
+            "description": "ID of the asset"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the asset"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the asset"
+          },
+          "associated_at": {
+            "type": "string",
+            "title": "Associated At",
+            "description": "Date of association of the asset"
+          },
+          "result_description": {
+            "type": "string",
+            "title": "Result Description",
+            "description": "Description of the result of the workload"
+          },
+          "workload_type": {
+            "$ref": "#/components/schemas/WorkloadType",
+            "description": "The type of the workload, centralized or federated"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/WorkloadOrigin",
+            "description": "The origin of the workload",
+            "default": "User"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkloadParameterDetails"
+            },
+            "type": "object",
+            "title": "Parameters",
+            "description": "Parameters needed to pass to the workload entrypoint            (Parameter name mapped to the details)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "asset_id",
+          "name",
+          "description",
+          "result_description",
+          "workload_type"
+        ],
+        "title": "WorkloadAssetShare"
+      },
+      "WorkloadDetails-Input": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Workload",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          },
+          "workload_format": {
+            "$ref": "#/components/schemas/WorkloadFormat",
+            "description": "What format of workload is provided"
+          },
+          "workload_type": {
+            "$ref": "#/components/schemas/WorkloadType",
+            "description": "Whether the workload is centralized or federated"
+          },
+          "workload_package": {
+            "$ref": "#/components/schemas/WorkloadPackage",
+            "description": "Kind of workload package is provided"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/WorkloadOrigin",
+            "description": "Origin of the workload - if created by the user or by Duality",
+            "default": "User"
+          },
+          "file_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "File Name",
+            "description": "Name of the workload entrypoint file (Required in the case of a workload package)"
+          },
+          "function_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Function Name",
+            "description": "Name of the workload entrypoint function (Only allowed in the case of a script workload)"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkloadParameterDetails"
+            },
+            "type": "object",
+            "title": "Parameters",
+            "description": "Parameters needed to pass to the workload entrypoint (Parameter name mapped to the details)"
+          },
+          "result_description": {
+            "type": "string",
+            "title": "Result Description",
+            "description": "Description of the workload output",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "workload_format",
+          "workload_type",
+          "workload_package"
+        ],
+        "title": "WorkloadDetails"
+      },
+      "WorkloadDetails-Output": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Workload",
+            "title": "Type",
+            "description": "Type of the asset detail"
+          },
+          "workload_format": {
+            "$ref": "#/components/schemas/WorkloadFormat",
+            "description": "What format of workload is provided"
+          },
+          "workload_type": {
+            "$ref": "#/components/schemas/WorkloadType",
+            "description": "Whether the workload is centralized or federated"
+          },
+          "workload_package": {
+            "$ref": "#/components/schemas/WorkloadPackage",
+            "description": "Kind of workload package is provided"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/WorkloadOrigin",
+            "description": "Origin of the workload - if created by the user or by Duality",
+            "default": "User"
+          },
+          "file_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "File Name",
+            "description": "Name of the workload entrypoint file (Required in the case of a workload package)"
+          },
+          "function_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Function Name",
+            "description": "Name of the workload entrypoint function (Only allowed in the case of a script workload)"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkloadParameterDetails"
+            },
+            "type": "object",
+            "title": "Parameters",
+            "description": "Parameters needed to pass to the workload entrypoint (Parameter name mapped to the details)"
+          },
+          "result_description": {
+            "type": "string",
+            "title": "Result Description",
+            "description": "Description of the workload output",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "workload_format",
+          "workload_type",
+          "workload_package"
+        ],
+        "title": "WorkloadDetails"
+      },
+      "WorkloadDetailsPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Workload",
+            "title": "Type",
+            "description": "Type of the asset"
+          },
+          "workload_format": {
+            "$ref": "#/components/schemas/WorkloadFormat",
+            "description": "Format of workload - script or notebook"
+          },
+          "workload_type": {
+            "$ref": "#/components/schemas/WorkloadType",
+            "description": "Whether the workload is centralized or federated"
+          },
+          "workload_package": {
+            "$ref": "#/components/schemas/WorkloadPackage",
+            "description": "Kind of workload package"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/WorkloadOrigin",
+            "description": "Origin of the workload - if created by the user or by Duality",
+            "default": "User"
+          },
+          "file_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "File Name",
+            "description": "Name of the workload entrypoint file (required for a workload package)"
+          },
+          "function_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Function Name",
+            "description": "Name of the workload entrypoint function (only needed for a script workload)"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkloadParameterDetails"
+            },
+            "type": "object",
+            "title": "Parameters",
+            "description": "Parameters needed to pass to the workload entrypoint (Parameter name mapped to the details)"
+          },
+          "result_description": {
+            "type": "string",
+            "title": "Result Description",
+            "description": "Description of the workload output",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "workload_format",
+          "workload_type",
+          "workload_package"
+        ],
+        "title": "WorkloadDetailsPayload"
+      },
+      "WorkloadFormat": {
+        "type": "string",
+        "enum": ["Script", "Notebook"],
+        "title": "WorkloadFormat"
+      },
+      "WorkloadOrigin": {
+        "type": "string",
+        "enum": ["User", "Duality"],
+        "title": "WorkloadOrigin"
+      },
+      "WorkloadPackage": {
+        "type": "string",
+        "enum": ["Single", "Package", "Flare Package"],
+        "title": "WorkloadPackage"
+      },
+      "WorkloadParameterDetails": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/WorkloadParameterType" },
+              { "type": "null" }
+            ],
+            "description": "The type of the workload parameter"
+          },
+          "default_value": {
+            "anyOf": [
+              { "type": "number" },
+              { "type": "string" },
+              { "$ref": "#/components/schemas/AssetID" },
+              { "type": "null" }
+            ],
+            "title": "Default Value",
+            "description": "Default value of the parameter"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the workload parameter",
+            "default": ""
+          },
+          "optional": {
+            "type": "boolean",
+            "title": "Optional",
+            "description": "Whether the parameter is optional",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "WorkloadParameterDetails"
+      },
+      "WorkloadParameterType": {
+        "type": "string",
+        "enum": ["Data", "Model", "String", "Numeric", "Other"],
+        "title": "WorkloadParameterType"
+      },
+      "WorkloadType": {
+        "type": "string",
+        "enum": ["Centralized", "Federated"],
+        "title": "WorkloadType"
+      }
+    }
+  }
+}

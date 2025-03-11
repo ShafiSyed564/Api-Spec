@@ -1,0 +1,125 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Example API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/v1",
+      "description": "Production Server"
+    },
+    {
+      "url": "https://staging-api.example.com/v1",
+      "description": "Staging Server"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "minimum": 18
+                  }
+                },
+                "required": ["name", "email"]
+              },
+              "examples": {
+                "example1": {
+                  "summary": "Valid user",
+                  "value": {
+                    "name": "John Doe",
+                    "email": "johndoe@example.com",
+                    "age": 25
+                  }
+                },
+                "example2": {
+                  "summary": "Another valid user",
+                  "value": {
+                    "name": "Alice Smith",
+                    "email": "alice@example.com",
+                    "age": 30
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "successResponse": {
+                    "summary": "Example response",
+                    "value": {
+                      "id": "12345",
+                      "name": "John Doe",
+                      "email": "johndoe@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingField": {
+                    "summary": "Missing required field",
+                    "value": {
+                      "error": "Email is required"
+                    }
+                  },
+                  "invalidEmail": {
+                    "summary": "Invalid email format",
+                    "value": {
+                      "error": "Invalid email address provided"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,241 @@
+openapi: 3.1.0
+info:
+  title: Data Types Demo API
+  version: 1.0.0
+  description: Demonstrates various OpenAPI data types and schema features
+
+paths:
+  /examples:
+    post:
+      summary: Example endpoint demonstrating various data types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompleteExample"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompleteExample"
+
+components:
+  schemas:
+    CompleteExample:
+      type: object
+      required:
+        - id
+        - name
+        - primitiveTypes
+        - arrayExample
+        - enumExample
+      properties:
+        # Primitive Types
+        id:
+          type: integer
+          format: int64
+          example: 123
+          description: Unique identifier
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "^[a-zA-Z0-9 ]+$"
+          example: "John Doe"
+        isActive:
+          type: boolean
+          example: true
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 85.5
+        primitiveTypes:
+          type: object
+          properties:
+            integer32:
+              type: integer
+              format: int32
+            integer64:
+              type: integer
+              format: int64
+            float:
+              type: number
+              format: float
+            double:
+              type: number
+              format: double
+            string:
+              type: string
+            byte:
+              type: string
+              format: byte
+            binary:
+              type: string
+              format: binary
+            date:
+              type: string
+              format: date
+            dateTime:
+              type: string
+              format: date-time
+            password:
+              type: string
+              format: password
+            email:
+              type: string
+              format: email
+            uuid:
+              type: string
+              format: uuid
+            uri:
+              type: string
+              format: uri
+            hostname:
+              type: string
+              format: hostname
+            ipv4:
+              type: string
+              format: ipv4
+            ipv6:
+              type: string
+              format: ipv6
+
+        # Array Example
+        arrayExample:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 5
+          uniqueItems: true
+          example: ["item1", "item2"]
+
+        # Enum Example
+        enumExample:
+          type: string
+          enum: ["PENDING", "ACTIVE", "SUSPENDED"]
+          default: "PENDING"
+
+        # Object with Additional Properties
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key1: "value1"
+            key2: "value2"
+
+        # AllOf Example
+        userProfile:
+          allOf:
+            - $ref: "#/components/schemas/BaseUser"
+            - $ref: "#/components/schemas/UserDetails"
+
+        # OneOf Example with Discriminator
+        pet:
+          oneOf:
+            - $ref: "#/components/schemas/Dog"
+            - $ref: "#/components/schemas/Cat"
+          discriminator:
+            propertyName: petType
+            mapping:
+              dog: "#/components/schemas/Dog"
+              cat: "#/components/schemas/Cat"
+
+        # AnyOf Example
+        notification:
+          anyOf:
+            - $ref: "#/components/schemas/EmailNotification"
+            - $ref: "#/components/schemas/SMSNotification"
+            - $ref: "#/components/schemas/PushNotification"
+
+    # Referenced Schemas
+    BaseUser:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+          format: uuid
+
+    UserDetails:
+      type: object
+      properties:
+        address:
+          type: string
+        phoneNumber:
+          type: string
+
+    Dog:
+      type: object
+      required:
+        - petType
+        - breed
+      properties:
+        petType:
+          type: string
+          enum: ["dog"]
+        breed:
+          type: string
+          example: "Labrador"
+        isGoodBoy:
+          type: boolean
+          example: true
+
+    Cat:
+      type: object
+      required:
+        - petType
+        - lives
+      properties:
+        petType:
+          type: string
+          enum: ["cat"]
+        lives:
+          type: integer
+          minimum: 1
+          maximum: 9
+          example: 9
+
+    EmailNotification:
+      type: object
+      required:
+        - type
+        - email
+      properties:
+        type:
+          type: string
+          enum: ["email"]
+        email:
+          type: string
+          format: email
+
+    SMSNotification:
+      type: object
+      required:
+        - type
+        - phoneNumber
+      properties:
+        type:
+          type: string
+          enum: ["sms"]
+        phoneNumber:
+          type: string
+
+    PushNotification:
+      type: object
+      required:
+        - type
+        - deviceId
+      properties:
+        type:
+          type: string
+          enum: ["push"]
+        deviceId:
+          type: string

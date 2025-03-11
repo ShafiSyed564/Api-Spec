@@ -1,0 +1,79 @@
+openapi: 3.1.0
+info:
+  title: Example API with Nullable Types
+  version: 1.0.0
+  description: Demonstrates both nullable and non-nullable types in OpenAPI 3.1
+
+paths:
+  /users:
+    get:
+      summary: Get user information
+      operationId: getUser
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - email
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: User ID (non-nullable)
+        username:
+          type: string
+          description: Username (non-nullable)
+        email:
+          type: string
+          format: email
+          description: Email address (non-nullable)
+        phoneNumber:
+          type: [string, "null"]
+          description: Phone number (nullable)
+        address:
+          type: object
+          nullable: true
+          description: Address information (nullable)
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            country:
+              type: string
+        lastLoginDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: Last login timestamp (nullable)
+        preferences:
+          type: object
+          properties:
+            theme:
+              type: string
+              enum: [light, dark]
+              default: light
+            notifications:
+              type: boolean
+              default: true
+          nullable: true
+          description: User preferences (nullable)

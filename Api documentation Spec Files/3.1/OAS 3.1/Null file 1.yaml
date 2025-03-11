@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: Example API
+  version: 1.0.0
+  description: API demonstrating nullable properties in OpenAPI 3.1
+
+paths:
+  /users:
+    get:
+      summary: Get User
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 123
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: [string, "null"] # Nullable property in OAS 3.1
+          example: null
+        age:
+          type: [integer, "null"] # Nullable property
+          example: 30
+      required:
+        - id
+        - name

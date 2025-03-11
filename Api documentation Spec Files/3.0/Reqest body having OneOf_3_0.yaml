@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: Example API
+  version: 1.0.0
+  description: API demonstrating requestBody with oneOf and root-level servers.
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging.api.example.com/v1
+    description: Staging server
+
+paths:
+  /submit-data:
+    post:
+      summary: Submit data with different request formats
+      operationId: submitData
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/RequestTypeA"
+                - $ref: "#/components/schemas/RequestTypeB"
+            examples:
+              typeA:
+                summary: Example request with Type A
+                value:
+                  type: "A"
+                  name: "John Doe"
+                  age: 30
+              typeB:
+                summary: Example request with Type B
+                value:
+                  type: "B"
+                  email: "john.doe@example.com"
+                  phone: "+1234567890"
+      responses:
+        "200":
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+components:
+  schemas:
+    RequestTypeA:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum: ["A"]
+        name:
+          type: string
+        age:
+          type: integer
+          format: int32
+
+    RequestTypeB:
+      type: object
+      required:
+        - type
+        - email
+      properties:
+        type:
+          type: string
+          enum: ["B"]
+        email:
+          type: string
+          format: email
+        phone:
+          type: string

@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Webhook API Example
+  version: 1.0.0
+  description: Example demonstrating webhooks with examples in requestBody
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging.api.example.com/v1
+    description: Staging server
+
+webhooks:
+  newEvent:
+    post:
+      summary: Webhook for new events
+      operationId: newEventWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Event"
+            examples:
+              exampleA:
+                summary: Example for Event Type A
+                value:
+                  eventType: "A"
+                  userId: "12345"
+                  timestamp: "2024-02-26T12:34:56Z"
+              exampleB:
+                summary: Example for Event Type B
+                value:
+                  eventType: "B"
+                  email: "user@example.com"
+                  verified: true
+      responses:
+        "200":
+          description: Webhook received successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        eventType:
+          type: string
+        userId:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        email:
+          type: string
+          format: email
+        verified:
+          type: boolean

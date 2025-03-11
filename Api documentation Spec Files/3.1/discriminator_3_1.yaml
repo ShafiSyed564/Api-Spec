@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Pet API
+  version: 1.0.0
+
+paths:
+  /pets:
+    get:
+      summary: Get all pets
+      operationId: getPets
+      responses:
+        "200":
+          description: A list of pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - petType
+      properties:
+        petType:
+          type: string
+      discriminator:
+        propertyName: petType # No "mapping" in OpenAPI 3.1
+
+    Dog:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            breed:
+              type: string
+              example: Labrador
+          required:
+            - breed
+      properties:
+        petType:
+          type: string
+          const: dog # OpenAPI 3.1 way to define discriminator mapping
+
+    Cat:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            color:
+              type: string
+              example: Black
+          required:
+            - color
+      properties:
+        petType:
+          type: string
+          const: cat # OpenAPI 3.1 way to define discriminator mapping

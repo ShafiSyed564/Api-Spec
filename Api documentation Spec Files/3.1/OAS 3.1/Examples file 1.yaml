@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: Example API
+  description: A sample API demonstrating the use of the `examples` keyword in OAS 3.1.
+  version: 1.0.0
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production Server
+
+paths:
+  /users:
+    get:
+      summary: Get a list of users
+      description: Retrieves a list of users with their details.
+      operationId: getUsers
+      responses:
+        '200':
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              examples:
+                example1:
+                  summary: Single User Response
+                  value:
+                    - id: 1
+                      name: John Doe
+                      email: john@example.com
+                example2:
+                  summary: Multiple Users Response
+                  value:
+                    - id: 1
+                      name: John Doe
+                      email: john@example.com
+                    - id: 2
+                      name: Jane Doe
+                      email: jane@example.com
+    post:
+      summary: Create a new user
+      description: Adds a new user to the system.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            examples:
+              example1:
+                summary: Valid User Creation Request
+                value:
+                  name: Alice Johnson
+                  email: alice@example.com
+              example2:
+                summary: Invalid User Request (Missing Email)
+                value:
+                  name: Alice Johnson
+      responses:
+        '201':
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                example1:
+                  summary: Successful Creation Response
+                  value:
+                    id: 3
+                    name: Alice Johnson
+                    email: alice@example.com
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missingEmail:
+                  summary: Missing Email Error
+                  value:
+                    error: "Email is required."
+                invalidFormat:
+                  summary: Invalid Email Format Error
+                  value:
+                    error: "Email format is invalid."
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "An error occurred."

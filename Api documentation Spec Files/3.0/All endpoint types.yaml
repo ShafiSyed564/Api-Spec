@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: User API
+  version: 1.0.0
+  description: API for managing user accounts.
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging.api.example.com/v1
+    description: Staging server
+
+paths:
+  /users:
+    get:
+      summary: Get a list of users
+      operationId: getUsers
+      description: Retrieve a list of all users.
+      responses:
+        "200":
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+    post:
+      summary: Create a new user
+      operationId: createUser
+      description: Adds a new user to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreate"
+            examples:
+              example1:
+                summary: Example user creation request
+                value:
+                  name: "John Doe"
+                  email: "johndoe@example.com"
+                  phoneNumber: "+1234567890"
+      responses:
+        "201":
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /users/{userId}:
+    get:
+      summary: Get a user by ID
+      operationId: getUserById
+      description: Retrieve details of a specific user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+
+    patch:
+      summary: Update a user partially
+      operationId: updateUser
+      description: Partially update a user’s information.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdate"
+            examples:
+              example1:
+                summary: Update user email
+                value:
+                  email: "newemail@example.com"
+              example2:
+                summary: Update user phone number
+                value:
+                  phoneNumber: "+1234567890"
+      responses:
+        "200":
+          description: User successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid request body
+        "404":
+          description: User not found
+
+    delete:
+      summary: Delete a user
+      operationId: deleteUser
+      description: Remove a user from the system.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: User successfully deleted
+        "404":
+          description: User not found
+
+    options:
+      summary: Get allowed methods for the user resource
+      operationId: getUserOptions
+      description: Returns the HTTP methods available for the `/users/{userId}` resource.
+      responses:
+        "200":
+          description: Allowed HTTP methods
+          headers:
+            Allow:
+              schema:
+                type: string
+              example: "GET, PATCH, DELETE, OPTIONS"
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+
+    UserCreate:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string

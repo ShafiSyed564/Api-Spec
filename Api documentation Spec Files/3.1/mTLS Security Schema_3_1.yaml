@@ -1,0 +1,108 @@
+openapi: 3.1.0
+info:
+  title: Secure API with Mutual TLS
+  version: 1.0.0
+  description: API specification demonstrating Mutual TLS (mTLS) authentication
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server with mTLS
+
+components:
+  securitySchemes:
+    mutualTLS:
+      type: apiKey
+      description: Mutual TLS authentication using client certificates
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+security:
+  - mutualTLS: []
+  - mutualTLS: []
+    bearerAuth: []
+
+paths:
+  /secure-resource:
+    get:
+      summary: Access a secure resource
+      description: Endpoint protected by Mutual TLS authentication
+      operationId: getSecureResource
+      security:
+        - mutualTLS: []
+        - mutualTLS: []
+          bearerAuth: []
+      responses:
+        "200":
+          description: Successfully retrieved secure resource
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+        "401":
+          description: Unauthorized - Invalid or missing client certificate
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden - Insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /client-authentication:
+    post:
+      summary: Client authentication endpoint
+      description: Authenticate client using mTLS and optional bearer token
+      operationId: authenticateClient
+      security:
+        - mutualTLS: []
+        - mutualTLS: []
+          bearerAuth: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                additionalData:
+                  type: string
+      responses:
+        "200":
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: authenticated
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"

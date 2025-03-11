@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Example API with Nested and Conditional Schemas
+  description: An example OpenAPI Specification demonstrating nested and conditional schemas.
+  version: "1.0.0"
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+paths:
+  /items:
+    post:
+      summary: Create an item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        "201":
+          description: Item created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponse'
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [A, B]
+        config:
+          type: object
+          properties:
+            option1:
+              type: string
+            option2:
+              type: integer
+          required: ["option1"]
+      required: ["type", "config"]
+      allOf:
+        - if:
+            properties:
+              type:
+                const: A
+          then:
+            properties:
+              config:
+                required: ["option2"]
+          else:
+            properties:
+              config:
+                required: ["option1"]
+    ItemResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+      required: ["id", "message"]

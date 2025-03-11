@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "f1424b25-91a7-4b96-b0aa-970afab8e4cd",
+		"name": "Data Type Example API Copy",
+		"description": "API showcasing various data types and formats in OpenAPI 3.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22639141"
+	},
+	"item": [
+		{
+			"name": "Upload various data types",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"integer32\": \"<integer>\",\n  \"integer64\": \"<long>\",\n  \"floatingPoint\": \"<float>\",\n  \"doublePrecision\": \"<double>\",\n  \"booleanValue\": \"<boolean>\",\n  \"stringValue\": \"<string>\",\n  \"dateValue\": \"<date>\",\n  \"dateTimeValue\": \"<dateTime>\",\n  \"durationValue\": \"<duration>\",\n  \"uuidValue\": \"<uuid>\",\n  \"jsonPointer\": \"<json-pointer>\",\n  \"byteValue\": \"<byte>\",\n  \"binaryValue\": \"<binary>\",\n  \"bitFlag\": \"<integer>\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://example.com/data",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"integer32\": \"<integer>\",\n  \"integer64\": \"<long>\",\n  \"floatingPoint\": \"<float>\",\n  \"doublePrecision\": \"<double>\",\n  \"booleanValue\": \"<boolean>\",\n  \"stringValue\": \"<string>\",\n  \"dateValue\": \"<date>\",\n  \"dateTimeValue\": \"<dateTime>\",\n  \"durationValue\": \"<duration>\",\n  \"uuidValue\": \"<uuid>\",\n  \"jsonPointer\": \"<json-pointer>\",\n  \"byteValue\": \"<byte>\",\n  \"binaryValue\": \"<binary>\",\n  \"bitFlag\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/data",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"data"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"message\": \"<string>\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Upload a binary file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://example.com/upload-file",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"upload-file"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "File uploaded successfully",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "<binary>",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/upload-file",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"upload-file"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"message\": \"<string>\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}

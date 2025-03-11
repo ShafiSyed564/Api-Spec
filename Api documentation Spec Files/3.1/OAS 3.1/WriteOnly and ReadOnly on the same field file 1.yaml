@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: WriteOnly and ReadOnly in the same Property
+  version: 1.0.0
+  description: Demonstrating both readOnly and writeOnly properties on the same field.
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+
+paths:
+  /auth/token:
+    post:
+      summary: Generate API Token
+      operationId: generateToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  example: secret123
+              required:
+                - email
+                - password
+      responses:
+        "201":
+          description: Token generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthToken"
+
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+          readOnly: true # Will only be present in the response
+          writeOnly: true # Will only be accepted in the request
+          example: abc123xyz456
+        expiresAt:
+          type: string
+          format: date-time
+          readOnly: true # Expiration date will only appear in the response
+          example: "2025-03-04T10:00:00Z"

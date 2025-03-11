@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Nested Example API
+  description: A nested OpenAPI 3.1 specification without paths.
+  version: 1.0.0
+servers:
+  - url: https://api.example.com
+    description: Production server
+components:
+  schemas:
+    ParentSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the parent object
+        child:
+          $ref: '#/components/schemas/ChildSchema'
+    ChildSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the child object
+        details:
+          $ref: '#/components/schemas/DetailsSchema'
+    DetailsSchema:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Detailed description of the child object
+        metadata:
+          type: object
+          properties:
+            createdAt:
+              type: string
+              format: date-time
+              description: Timestamp when the object was created
+            updatedAt:
+              type: string
+              format: date-time
+              description: Timestamp when the object was last updated
+  responses:
+    GeneralErrorResponse:
+      description: A general error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errorCode:
+                type: integer
+                description: Error code representing the issue
+              message:
+                type: string
+                description: Human-readable error message
+
+securitySchemes:
+  apiKeyAuth:
+    type: apiKey
+    in: header
+    name: X-API-Key
+
+tags:
+  - name: ParentOperations
+    description: Operations related to parent objects.
+  - name: ChildOperations
+    description: Operations related to child objects.
+
+externalDocs:
+  description: Learn more about this API.
+  url: https://example.com/docs

@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Pet API
+  version: 1.0.0
+
+paths:
+  /pets:
+    get:
+      summary: Get all pets
+      operationId: getPets
+      responses:
+        "200":
+          description: A list of pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - petType
+      properties:
+        petType:
+          type: string
+      discriminator:
+        propertyName: petType # ✅ No explicit mapping required in OpenAPI 3.1
+      oneOf:
+        - $ref: "#/components/schemas/Dog"
+        - $ref: "#/components/schemas/Cat"
+
+    Dog:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            breed:
+              type: string
+          required:
+            - breed
+
+    Cat:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            color:
+              type: string
+          required:
+            - color
+
+    MixedPet:
+      type: object
+      anyOf:
+        - $ref: "#/components/schemas/Dog"
+        - $ref: "#/components/schemas/Cat"
+      properties:
+        petType:
+          type: string
+          enum: [dog, cat]
