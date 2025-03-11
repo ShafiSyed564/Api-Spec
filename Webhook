@@ -72,7 +72,7 @@ components:
     Event:
       type: object
       properties:
-        eventType99999999999999Now10ActuallyIRemovedIt:
+        eventType99999999999999IActuallyRevertedIt:
           type: string
         userId:
           type: string
