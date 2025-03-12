@@ -4,6 +4,12 @@
     "title": "Webhook Example",
     "version": "1.0.0"
   },
+  "servers": [
+  		{
+  			"url": "http://localhost:784",
+  			"description": "Inferred Url"
+  		}
+  ],
   "webhooks": {
     "newPet": {
       "post": {
